@@ -1,11 +1,13 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
-
+/** {
+  font-family: Courier;
+}*/
 .navbar {
   background-color: orange;
   text-color: black;
 }
-.col-md-4 h2 {
+/*.col-md-4 h2 {
   background-color: #ccccff;
   border: 1px black solid;
   border-bottom: 0px;
@@ -15,20 +17,35 @@
 .col-md-4 p,
 .col-md-4 ul {
   border: 1px black solid;
+}*/
+.navbar {
+  margin-bottom: 0px;
 }
 
-.jumbotron .container {
-  border:solid;
+
+#wrapper {
   background-color: grey;
 }
-.jumbotron {
+#wrapper .container {
   background-color: white;
 }
+.jumbotron {
+  background-color: grey;
+  border: solid;
+  margin-top: 40px;
+}
 
-.photo .col-md-4 {
+/*.photo .col-md-4 {
+
   text-align: center;
-}
+}*/
 img {
-  width: 360px;
-  height: 217px;
+  width: 160%;
+  height: 145px;
+  overflow: hidden;
 }
+
+/*#wrapper {
+  margin-left: 10%;
+  margin-right: 10%;
+}*/

@@ -35,52 +35,83 @@
     </div>
     <div id="wrapper">
       <!-- Main jumbotron for a primary marketing message or call to action -->
-      <div class="jumbotron">
-        <div class="container">
-          <h1>gCamp</h1>
+      <div class="container">
+        <div class="jumbotron">
+          <div class"container">
+          <h1><b>g</b>Camp</h1>
           <p>Your life, organized.</p>
+          </div>
         </div>
       </div>
       <%= yield %>
-      <div class= "container photo">
+      <div class= "container">
           <div class= "row">
             <div class="col-md-4">
-              <img src='/assets/workphoto.jpg'/>
+              <div class="row">
+                <div class="col-md-12">
+                  <img src="/assets/workphoto.jpg" class="img-responsive" alt="Responsive image">
+                </div>
+              </div>
             </div>
-          <div class="col-md-4">
-            <img src='/assets/workphoto3.jpg'/>
-          </div>
-          <div class="col-md-4">
-            <img src='/assets/workphoto2.jpg'/>
+            <div class="col-md-4">
+              <div class="row">
+                <div class="col-md-12">
+                    <img src="/assets/workphoto3.jpg" class="img-responsive" alt="Responsive image">
+                  </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+              <div class="row">
+                <div class="col-md-12">
+                  <img src="/assets/workphoto2.jpg" class="img-responsive" alt="Responsive image">
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
       <div class="container">
         <!-- Example row of columns -->
         <div class="row">
           <div class="col-md-4">
-            <h2>Tasks</h2>
-            <p>Grouped by projects and lists. Just the way you like'em.</p>
+            <div class="panel panel-info">
+              <div class="panel-heading">
+                <h2 class="panel-title">Tasks</h2>
+              </div>
+              <div class="panel-body">
+                <p>Grouped by projects and lists. Just the way you like'em.</p>
+              </div>
+            </div>
           </div>
           <div class="col-md-4">
-            <h2>Documents</h2>
-            <ul>
-              <li>Upload</li>
-              <li>Comment</li>
-              <li>Revise</li>
-            </ul>
+            <div class="panel panel-info">
+              <div class="panel-heading">
+                <h2 class="panel-title">Documents</h2>
+              </div>
+              <div class="panel-body">
+                <ul>
+                  <li>Upload</li>
+                  <li>Comment</li>
+                  <li>Revise</li>
+                </ul>
+              </div>
+            </div>
          </div>
           <div class="col-md-4">
-            <h2>Comments</h2>
-            <ul>
-              <li>Comment on tasks and documents</li>
-              <li>Get email notifications</li>
-            </ul>
+            <div class="panel panel-info">
+              <div class="panel-heading">
+                <h2 class="panel-title">Comments</h2>
+              </div>
+              <div class="panel-body">
+                <ul>
+                  <li>Comment on tasks and documents</li>
+                  <li>Get email notifications</li>
+                </ul>
+              </div>
           </div>
         </div>
+      </div>
 
       <hr>
-
       <footer>
         <p>&copy; Company 2014</p>
       </footer>
