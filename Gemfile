@@ -1,5 +1,11 @@
 source 'https://rubygems.org'
 
+group :production do
+  gem "pg"
+  gem "rails_12factor"
+end
+
+
 gem 'bootstrap-sass', '~> 3.2.0'
 gem 'autoprefixer-rails'
 
