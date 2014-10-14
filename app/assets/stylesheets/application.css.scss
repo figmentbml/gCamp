@@ -1,10 +1,6 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-* {
-  font-family: Courier;
-}
-
 .navbar {
   background-color: orange;
   text-color: black;
@@ -31,12 +27,15 @@ img {
   overflow: hidden;
 }
 
-.text-center {
+.center {
+  text-align: center;
 }
 
 .text-left {
 
 }
-.smaller {
+.smaller img {
+  display: block;
   width: 50%;
+  margin: 0 auto;
 }
