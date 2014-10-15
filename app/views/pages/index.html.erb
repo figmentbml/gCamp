@@ -1,83 +1,60 @@
-  <div class="jumbotron">
-    <div class"container">
-    <h1><b>g</b>Camp</h1>
-    <p>Your life, organized.</p>
-    </div>
-  </div>
-
-  <div class= "row">
-    <div class="col-md-4">
-      <div class="row">
-        <div class="col-md-12">
-          <%= image_tag("workphoto.jpg", class: "img-responsive") %>
-        </div>
+<div class="background">
+    <div class="jumbotron">
+      <div class"container">
+      <h1><b>g</b>Camp</h1>
+      <p>Your life, organized.</p>
       </div>
     </div>
-    <div class="col-md-4">
-      <div class="row">
-        <div class="col-md-12">
-            <%= image_tag("workphoto3.jpg", class: "img-responsive") %>
+    <!-- Example row of columns -->
+    <div class="row">
+      <div class="col-md-4">
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            <h2 class="panel-title">Tasks</h2>
+          </div>
+          <div class="panel-body">
+            <p>Grouped by projects and lists. Just the way you like'em.</p>
           </div>
         </div>
-    </div>
-    <div class="col-md-4">
-      <div class="row">
-        <div class="col-md-12">
-          <%= image_tag("workphoto2.jpg", class: "img-responsive") %>
+      </div>
+      <div class="col-md-4">
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            <h2 class="panel-title">Documents</h2>
+          </div>
+          <div class="panel-body">
+            <ul>
+              <li>Upload</li>
+              <li>Comment</li>
+              <li>Revise</li>
+            </ul>
+          </div>
+        </div>
+     </div>
+      <div class="col-md-4">
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            <h2 class="panel-title">Comments</h2>
+          </div>
+          <div class="panel-body">
+            <ul>
+              <li>Comment on tasks and documents</li>
+              <li>Get email notifications</li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- Example row of columns -->
-  <div class="row">
-    <div class="col-md-4">
-      <div class="panel panel-info">
-        <div class="panel-heading">
-          <h2 class="panel-title">Tasks</h2>
-        </div>
-        <div class="panel-body">
-          <p>Grouped by projects and lists. Just the way you like'em.</p>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="panel panel-info">
-        <div class="panel-heading">
-          <h2 class="panel-title">Documents</h2>
-        </div>
-        <div class="panel-body">
-          <ul>
-            <li>Upload</li>
-            <li>Comment</li>
-            <li>Revise</li>
-          </ul>
-        </div>
-      </div>
-   </div>
-    <div class="col-md-4">
-      <div class="panel panel-info">
-        <div class="panel-heading">
-          <h2 class="panel-title">Comments</h2>
-        </div>
-        <div class="panel-body">
-          <ul>
-            <li>Comment on tasks and documents</li>
-            <li>Get email notifications</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
+  <% quotes = [
+    ["Failure is not an option. Everyone has to succeed", "- Arnold"],
+    ["Your time is limited, so don't waste it living someone else's life.", "- Steve Jobs"],
+    ["The present is surrendered to the past and the future.", "- Walker Percy"]
+      ] %>
+      <% quotes.each do |quote| %>
+            <p>"<%= quote[0] %>"
+              <%= quote[1] %>
+            </p>
+            <% end %>
 
-<% quotes = [
-  ["Failure is not an option. Everyone has to succeed", "- Arnold"],
-  ["Your time is limited, so don't waste it living someone else's life.", "- Steve Jobs"],
-  ["The present is surrendered to the past and the future.", "- Walker Percy"]
-    ] %>
-
-<% quotes.each do |quote| %>
-<p>"<%= quote[0] %>"
-  <%= quote[1] %>
-</p>
-<% end %>
+</div>
