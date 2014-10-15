@@ -67,13 +67,10 @@
         </div>
       </div>
   </div>
-    <div class= "blockquote">
-
       <% @quotes.each do |quote| %>
             <blockquote>
               <p>"<%= quote.quote %>"</p>
               <footer><em><%= quote.author %></em></footer>
             </blockquote>
             <% end %>
-    </div>
 </div>
