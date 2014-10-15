@@ -6,6 +6,29 @@
       </div>
     </div>
     <!-- Example row of columns -->
+          <div class= "row">
+            <div class="col-md-4">
+             <div class="row">
+                <div class="col-md-12">
+                  <%= image_tag("workphoto.jpg", class: "img-responsive") %>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="row">
+                <div class="col-md-12">
+                    <%= image_tag("workphoto3.jpg", class: "img-responsive") %>
+                  </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+              <div class="row">
+                <div class="col-md-12">
+                  <%= image_tag("workphoto2.jpg", class: "img-responsive") %>
+                </div>
+              </div>
+            </div>
+          </div>
     <div class="row">
       <div class="col-md-4">
         <div class="panel panel-info">
@@ -44,17 +67,14 @@
           </div>
         </div>
       </div>
-    </div>
+  </div>
+    <div class= "blockquote">
 
-  <% quotes = [
-    ["Failure is not an option. Everyone has to succeed", "- Arnold"],
-    ["Your time is limited, so don't waste it living someone else's life.", "- Steve Jobs"],
-    ["The present is surrendered to the past and the future.", "- Walker Percy"]
-      ] %>
-      <% quotes.each do |quote| %>
-            <p>"<%= quote[0] %>"
-              <%= quote[1] %>
-            </p>
+      <% @quotes.each do |quote| %>
+            <blockquote>
+              <p>"<%= quote[0] %>"</p>
+              <footer><em><%= quote[1] %></em></footer>
+            </blockquote>
             <% end %>
-
+    </div>
 </div>
