@@ -2,22 +2,19 @@
 @import "bootstrap";
 
 .navbar {
-  background-color: orange;
-  text-color: black;
+  background-color: black;
+  text-color: white;
   margin-bottom: 0px;
 }
 
-#wrapper {
-  background-color: grey;
-}
-
-#wrapper .container {
-  background-color: white;
-}
 .jumbotron {
   text-align: center;
   background: none;
   margin-top: 40px;
+}
+
+.panel-big-body {
+padding: 120px;
 }
 
 img {

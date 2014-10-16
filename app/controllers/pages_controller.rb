@@ -19,7 +19,7 @@ class PagesController < ApplicationController
 
   def faq
       faq1 = Faq.new
-      faq1.question = "What-is-gCamp?"
+      faq1.question = "What is gCamp?"
       faq1.answer = "gCamp is an awesome tool that will change your life."
 
       faq2 = Faq.new

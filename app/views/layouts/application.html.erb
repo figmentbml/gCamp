@@ -34,17 +34,16 @@
 
       </div>
     </div>
-    <div id="wrapper">
-      <div class="container">
+    <div class="panel panel-default">
+      <div class="panel-big-body">
         <%= yield %>
+      </div>
         <hr>
-        <div class "footer">
-        <footer>
+        <div class="panel-footer">
             <%= link_to("About", about_path) %>    |
             <%= link_to("Terms", terms_path) %>    |
             <%= link_to("FAQ", faq_path) %>
         <br/>
-        </footer>
         </div>
       </div>
     </div> <!-- /container -->
