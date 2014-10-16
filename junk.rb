@@ -43,3 +43,19 @@ def faq
     <footer><%= faq.answer %></footer>
     <br/>
   <% end %>
+
+
+in models/faq
+def initialize(question, answer)
+  @question = question
+  @answer = answer
+end
+
+faq = Faq.new("","")
+
+p faq
+
+
+  car = Car.new("Chevy", "Tracker", 1978)
+
+  p car
