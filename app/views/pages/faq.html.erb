@@ -1,9 +1,20 @@
 <h1>Frequently Asked Questions</h1>
-</br>
-</br>
+
+<ul>
+<% @faqs.each do |faq| %>
+      <li>
+      <a name= "faq.question">
+        <strong><%= faq.question %></strong>
+      </a>
+      </li>
+      <br/>
+  <% end %>
+</ul>
+<br/>
+<br/>
 
 <% @faqs.each do |faq| %>
-    <p><strong><%= faq.question %></strong></p>
+    <strong><a href= "#faq.question"><%= faq.question %></strong></a></p>
     <footer><%= faq.answer %></footer>
     <br/>
   <% end %>

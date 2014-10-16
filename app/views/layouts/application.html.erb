@@ -38,18 +38,14 @@
       <div class="container">
         <%= yield %>
         <hr>
+        <div class "footer">
         <footer>
-          <ul class="list-inline">
-            <li>
-            <%= link_to("About", about_path) %>
-            <%= link_to("Terms", terms_path) %>
+            <%= link_to("About", about_path) %>    |
+            <%= link_to("Terms", terms_path) %>    |
             <%= link_to("FAQ", faq_path) %>
-            </li>
-          </ul>
-          <div class= "text-left">
-            <p>&copy; Company 2014</p>
-          </div>
+        <br/>
         </footer>
+        </div>
       </div>
     </div> <!-- /container -->
 
