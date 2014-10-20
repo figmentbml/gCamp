@@ -1,23 +1,13 @@
 <h1>Editing task</h1>
 
-<form role="form">
-<div class="form-group">
-  <div class="col-sm-offset-0 col-sm-10">
     <br/>
-    <%= render 'form', button_name: "Update Task" %>
-    <%= link_to 'Update Task', new_task_path, class: "btn btn-info btn-primary pull-right" %>
-
-  </div>
-</div>
-
-<div class="checkbox">
-    <label>
-      <%= check_box_tag(:complete) %>
-      <%= label_tag(:complete, "Complete") %>
-    </label>
-  </div>
-
-</form>
+    <%= render 'form' %>
+    <div class="checkbox">
+        <label>
+          <%= check_box_tag(:complete) %>
+          <%= label_tag(:complete, "Complete") %>
+        </label>
+    </div>
 
 
 <%= link_to 'Show', @task %> |
