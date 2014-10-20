@@ -1,3 +1,10 @@
+<%= link_to 'Create Task', new_task_path, class: "btn btn-info btn-primary pull-right" %>
+
+<%= render 'form', button_name: "Update Task" %>
+
+
+
+
 def faq
     faq1 = Faq.new
     faq1.question = <%= link_to "What-is-gCamp?">, #what-is-gcamp_path %>
