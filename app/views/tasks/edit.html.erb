@@ -1,14 +1,10 @@
-<h1>Editing task</h1>
+<h1>Edit task</h1>
 
     <br/>
-    <%= render 'form' %>
+    <%= render 'form', button_name: "Update Task" %>
     <div class="checkbox">
         <label>
           <%= check_box_tag(:complete) %>
           <%= label_tag(:complete, "Complete") %>
         </label>
     </div>
-
-
-<%= link_to 'Show', @task %> |
-<%= link_to 'Back', tasks_path %>
