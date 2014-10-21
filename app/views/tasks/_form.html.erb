@@ -17,11 +17,22 @@
       <%= f.text_field :description, class: "col-sm-8" %>
     </div>
   </div>
+
+  <% unless current_page?(new_task_path) %>
     <div class="form-group">
       <div class="col-sm-offset-1 col-sm-10">
-        <br/>
-        <%= f.submit name: button_name, class: "btn btn-primary"%>
+        <%= f.check_box :complete %>
+        <%= f.label :complete %>
       </div>
     </div>
+  <% end %>
+
+
+  <div class="form-group">
+    <div class="col-sm-offset-1 col-sm-10">
+        <br/>
+        <%= f.submit name: button_name, class: "btn btn-primary"%>
+    </div>
+  </div>
 <% end %>
 </div>

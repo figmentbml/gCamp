@@ -1,3 +1,5 @@
+<col style=width:70%>
+
 <%= link_to 'Create Task', new_task_path, class: "btn btn-info btn-primary pull-right" %>
 
 <%= render 'form', button_name: "Update Task" %>
