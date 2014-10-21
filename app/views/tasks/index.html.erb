@@ -14,10 +14,9 @@
     <% @tasks.each do |task| %>
       <tr>
         <td><%= task.description %></td>
-        <td><button type="button" class="btn btn-danger pull-right"><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></button>
-        <button type="button" class="btn btn-info pull-right"><%= link_to 'Edit', edit_task_path(task) %></button>
-        <button type="button" class="btn btn-success pull-right"><%= link_to 'Show', task %></button>
-        </td>
+          <td><button type="button" class="btn btn-success pull-right"><%= link_to 'Show', task %></td>
+          <td><button type="button" class="btn btn-info pull-right"><%= link_to 'Edit', edit_task_path(task) %></td>
+          <td><button type="button" class="btn btn-danger pull-right"><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
