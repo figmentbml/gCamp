@@ -1,10 +1,10 @@
 <div class="page-header">
-  <div class="row">
-    <h1>Tasks</h1>
-    <%= link_to "All", tasks_path(type: "all pull-right") %>  |
-    <%= link_to "Incomplete", tasks_path(type: "incomplete") %>
-    <%= link_to 'Create Task', new_task_path, class: "btn btn-info btn-primary pull-right" %>
+  <div class= "pull-right">
+    <%= link_to_if((@ref == "incomplete"), "All", tasks_path(type: "all")) %>  |
+    <%= link_to_if((@ref == "all"), "Incomplete", tasks_path(type: "incomplete")) %>
+    <%= link_to 'Create Task', new_task_path, class: "btn btn-info btn-primary" %>
   </div>
+  <h1>Tasks</h1>
 </div>
 <table class="table">
     <thead>
