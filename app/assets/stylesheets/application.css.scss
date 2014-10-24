@@ -30,7 +30,7 @@ blockquote {
   border-left: none;
 }
 
-img {
+.index-image {
   width: 160%;
   height: 145px;
   overflow: hidden;
@@ -50,4 +50,13 @@ img {
   border-bottom: solid;
   border-bottom-color: lightgrey;
   border-bottom-width: thin;
+}
+.footer {
+  div {
+    display: inline-block;
+  }
+
+  img {
+    height: 20px;
+  }
 }

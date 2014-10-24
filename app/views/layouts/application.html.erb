@@ -40,30 +40,29 @@
         <%= yield %>
         <hr>
         <div class="footer">
-          <div class= "col-md-2">
+          <div>
             <%= link_to("About", about_path) %>    |
             <%= link_to("Terms", terms_path) %>    |
             <%= link_to("FAQ", faq_path) %>        |
             <%= link_to("Tasks", tasks_path) %>
           </div>
-          <div class= "col-md-2 col-md-offset-8">
+          <div class= "pull-right">
             <%= link_to "http://www.linkedin.com/in/bethjaswa/" do %>
-              <%= image_tag("linked_in.png", width: "20em") %>
+              <%= image_tag("linked_in.png") %>
             <% end %> |
             <%= link_to "http://www.github.com/figmentbml" do %>
-              <%= image_tag("GitHub.png", width: "20em") %>
+              <%= image_tag("GitHub.png") %>
             <% end %> |
             <%= link_to "http://www.twitter.com/@figmentbml" do %>
-              <%= image_tag("Twitter_logo.png", width: "20em") %>
+              <%= image_tag("Twitter_logo.png") %>
             <% end %> |
             <%= link_to "http://www.galvanize.it" do %>
-              <%= image_tag("gschool_logo.png", width: "20em") %>
+              <%= image_tag("gschool_logo.png") %>
             <% end %> |
           </div>
         <br/>
         </div>
     </div>
-<%= image_tag("workphoto2.jpg"
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
