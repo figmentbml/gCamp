@@ -18,7 +18,13 @@
       <div class="col-md-12">
         <div class="row">
           <% @tasks.each do |task| %>
-            <tr>
+            <% if task.due_date != nil %>
+              <% if task.due_date >= Date.today && task.due_date <= Date.today+6 %>
+              <tr class = "alert alert-danger" >
+              <% else %>
+              <tr>
+            <% end %>
+            <% end %>
               <td><%= task.description %></td>
               <td><%= task.complete %></td>
               <td>
