@@ -4,9 +4,7 @@
 <ul>
   <% @faqs.each do |faq| %>
     <li>
-      <a name= "faq.question">
-      <a href= "#faq.question"><%= faq.question %></strong></a>
-      </a>
+      <strong><%= link_to(faq.question, faq_path(:anchor => faq.question)) %></strong>
     </li>
 <br/>
   <% end %>
@@ -15,9 +13,10 @@
 <br/>
 
 <% @faqs.each do |faq| %>
+  <a name= "<%= faq.question %>"></a>
     <strong><%= faq.question %></strong>
     <footer><%= faq.answer %></footer>
-    <%= link_to("Top", faq_path) %>
+    <%= link_to("Top", faq_path(:anchor => "top")) %>
     <br/>
     <br/>
   <% end %>

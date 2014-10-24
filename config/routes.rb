@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   root "pages#index"
   get "/about" => "pages#about", as: :about
   get "/terms" => "pages#terms", as: :terms
-  get "/faqs#top" => "pages#faq", as: :faq
+  get "/faqs" => "pages#faq", as: :faq
 
 end
 
