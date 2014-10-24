@@ -5,7 +5,7 @@
   <% @faqs.each do |faq| %>
     <li>
       <a name= "faq.question">
-      <strong><%= faq.question %></strong>
+      <a href= "#faq.question"><%= faq.question %></strong></a>
       </a>
     </li>
 <br/>
@@ -15,7 +15,9 @@
 <br/>
 
 <% @faqs.each do |faq| %>
-    <strong><a href= "#faq.question"><%= faq.question %></strong></a></p>
+    <strong><%= faq.question %></strong>
     <footer><%= faq.answer %></footer>
+    <%= link_to("Top", faq_path) %>
+    <br/>
     <br/>
   <% end %>
