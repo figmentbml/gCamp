@@ -17,28 +17,28 @@
     <tbody>
       <div class="col-md-12">
         <div class="row">
-    <% @tasks.each do |task| %>
-      <tr>
-        <td><%= task.description %></td>
-        <td><%= task.complete %></td>
-        <td>
-          <% if task.due_date %>
-            <%= task.due_date.strftime("%m/%d/%Y") %>
-            <% else nil %>
-            <% end %>
-          </td>
-          <td>
-            <div class= "pull-right">
-            <%= link_to 'Show', task, class:"btn btn-success" %>
-            <%= link_to 'Edit', edit_task_path(task), class:"btn btn-info" %>
-            <%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
-            </div>
-        </td>
-      </tr>
-    <% end %>
-    </div>
-    </div>
-  </tbody>
+          <% @tasks.each do |task| %>
+            <tr>
+              <td><%= task.description %></td>
+              <td><%= task.complete %></td>
+              <td>
+                <% if task.due_date %>
+                  <%= task.due_date.strftime("%m/%d/%Y") %>
+                  <% else nil %>
+                  <% end %>
+                </td>
+                <td>
+                  <div class= "pull-right">
+                  <%= link_to 'Show', task, class:"btn btn-success" %>
+                  <%= link_to 'Edit', edit_task_path(task), class:"btn btn-info" %>
+                  <%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+                  </div>
+              </td>
+            </tr>
+          <% end %>
+        </div>
+      </div>
+    </tbody>
 </table>
 
 <br>

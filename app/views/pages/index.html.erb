@@ -1,33 +1,33 @@
 <div class="background">
     <div class="jumbotron">
       <div class"container">
-      <h1><b>g</b>Camp</h1>
-      <p>Your life, organized.</p>
+        <h1><b>g</b>Camp</h1>
+        <p>Your life, organized.</p>
       </div>
     </div>
-          <div class= "row">
-            <div class="col-md-4">
-             <div class="row">
-                <div class="col-md-12">
-                  <%= image_tag("workphoto.jpg", class: "img-responsive index-image") %>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="row">
-                <div class="col-md-12">
-                    <%= image_tag("workphoto3.jpg", class: "img-responsive index-image") %>
-                  </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-              <div class="row">
-                <div class="col-md-12">
-                  <%= image_tag("workphoto2.jpg", class: "img-responsive index-image") %>
-                </div>
-              </div>
-            </div>
+    <div class= "row">
+      <div class="col-md-4">
+        <div class="row">
+          <div class="col-md-12">
+            <%= image_tag("workphoto.jpg", class: "img-responsive index-image") %>
           </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="row">
+          <div class="col-md-12">
+              <%= image_tag("workphoto3.jpg", class: "img-responsive index-image") %>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="row">
+          <div class="col-md-12">
+            <%= image_tag("workphoto2.jpg", class: "img-responsive index-image") %>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="row">
       <div class="col-md-4">
         <div class="panel panel-info">
@@ -66,11 +66,11 @@
           </div>
         </div>
       </div>
-  </div>
-      <% @quotes.each do |quote| %>
-            <blockquote>
-              <p>"<%= quote.quote %>"</p>
-              <footer><em><%= quote.author %></em></footer>
-            </blockquote>
-            <% end %>
+    </div>
+    <% @quotes.each do |quote| %>
+      <blockquote>
+        <p>"<%= quote.quote %>"</p>
+        <footer><em><%= quote.author %></em></footer>
+      </blockquote>
+      <% end %>
 </div>
