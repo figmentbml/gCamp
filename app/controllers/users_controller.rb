@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     @user.save
-    redirect_to users_path, notice: 'Event was successfully created.'
+    redirect_to users_path, notice: 'User was successfully created.'
   end
 
 private

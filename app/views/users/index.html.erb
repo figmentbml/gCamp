@@ -1,18 +1,24 @@
-<%= link_to 'Create User', new_user_path, class: "btn btn-info btn-primary" %>
+<strong><p class="alert-success text-center"><%= notice %></p></strong>
 
-<table>
+<div class="page-header">
+  <div class= "pull-right">
+    <%= link_to 'Create User', new_user_path, class: "btn btn-info btn-primary" %>
+  </div>
+  <h1>Users</h1>
+</div>
+<table class="table">
   <thead>
     <tr>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>Email</th>
+      <th width="25%">Name</th>
+      <th width="75%">Email</th>
     </tr>
   </thead>
   <tbody>
-    <% @users.each do |user| %>
-    <td><%= user.first_name %></td>
-    <td><%= user.last_name %></td>
-    <td><%= user.email %></td>
-    <% end %>
+        <% @users.each do |user| %>
+        <tr>
+          <td><%= user.first_name %> <%= user.last_name %></td>
+          <td><%= mail_to(user.email) %></td>
+        </tr>
+        <% end %>
   </tbody>
 </table>
