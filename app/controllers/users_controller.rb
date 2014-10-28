@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def index
     @users = User.all
@@ -14,7 +15,21 @@ class UsersController < ApplicationController
     redirect_to users_path, notice: 'User was successfully created.'
   end
 
+  def edit
+  end
+
+  def update
+    @user.update(user_params)
+    @user.save
+    redirect_to users_path, notice: "User was successfully updated."
+  end
+
+
 private
+  def set_user
+    @user = User.find(params[:id])
+  end
+
   def user_params
     params.required(:user).permit(:first_name, :last_name, :email)
   end
