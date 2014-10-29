@@ -14,10 +14,10 @@
     </tr>
   </thead>
   <tbody>
-//*need to add user.last_name
         <% @users.each do |user| %>
         <tr>
-          <td><%= link_to user.first_name, user_path(user) %></td>
+          <td><%= link_to ([user.first_name.capitalize + ' ' + user.last_name.capitalize].join),
+            user_path(user) %></td>
           <td><%= mail_to(user.email) %></td>
           <td><%= link_to 'Edit', edit_user_path(user) %></td>
         </tr>
