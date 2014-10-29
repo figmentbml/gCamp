@@ -4,7 +4,8 @@
 <ul>
   <% @faqs.each do |faq| %>
     <li>
-      <strong><%= link_to(faq.question, faq_path(:anchor => faq.question)) %></strong>
+      <strong><%= link_to(faq.question,
+      faq_path(@faq, :anchor => faq.question.gsub(/ /, '-'))) %></strong>
     </li>
 <br/>
   <% end %>
@@ -13,9 +14,8 @@
 <br/>
 
 <% @faqs.each do |faq| %>
-  <a name= "<%= faq.question %>"></a>
-    <strong><%= faq.question %></strong>
-    <footer><%= faq.answer %></footer>
+    <strong><a name="<%= faq.question.gsub(/ /, '-') %>"></a><%= faq.question %></strong>
+    <p><%= faq.answer %></p>
     <%= link_to("Top", faq_path(:anchor => "top")) %>
     <br/>
     <br/>
