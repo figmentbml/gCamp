@@ -1,0 +1,10 @@
+<div class="form-horizontal">
+<%= form_for @project do |f| %>
+
+<%= f.label :name, "Name" %>
+<%= f.text_field :name %>
+
+<%= f.submit button_name: "Create Project" %>
+
+<% end %>
+</div>

@@ -1,0 +1,20 @@
+<strong><p class="alert-success text-center"><%= notice %></p></strong>
+
+<div class="page-header">
+  <div class= "pull-right">
+    <%= link_to 'Create Project', new_project_path, class: "btn btn-info btn-primary" %>
+  </div>
+  <h1>Projects</h1>
+</div>
+<table>
+    <thead>
+      <tr>Name</tr>
+    </thead>
+  <tbody>
+    <% @projects.each do |project| %>
+      <tr>
+        <td><%= project.name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
