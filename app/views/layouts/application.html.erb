@@ -21,7 +21,7 @@
         </ul>
         <ul class= "navbar-brand navbar-nav navbar-right">
           <% if current_user %>
-            <%= link_to current_user.email, user_path(@user) %>
+            <%= link_to current_user.email, users_path(@user) %>
             <%= link_to "Sign Out", signout_path(@user) %>
             <% else %>
               <%= link_to "Sign Up", signup_path %>
