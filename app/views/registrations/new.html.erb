@@ -5,11 +5,9 @@
 <%= form_for @user, url: signup_path do |f| %>
 
   <% if @user.errors.present? %>
-    <ul>
-      <% @user.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+    <% @user.errors.full_messages.each do |message| %>
+      <p class="error_message"><%= message %></p>
       <% end %>
-    </ul>
   <% end %>
 
   <div class="form-group">
