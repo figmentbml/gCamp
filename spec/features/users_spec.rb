@@ -17,4 +17,77 @@ feature "Users" do
 
   end
 
+  scenario "Edit User from Users Index" do
+    User.create!(
+      first_name: "James",
+      last_name: "Lacy",
+      email: "jim@email.com",
+      password: "123",
+      password_confirmation: "123"
+    )
+    visit users_path
+    expect(page).to have_content("jim@email.com")
+
+    click_on "Edit"
+    fill_in "Email", with: "james@email.com"
+    click_button "Update User"
+    expect(page).to have_content("James")
+    expect(page).to have_content("Lacy")
+    expect(page).to have_content("james@email.com")
+
+  end
+
+  scenario "Edit User from User Show" do
+    User.create!(
+      first_name: "James",
+      last_name: "Lacy",
+      email: "jim@email.com",
+      password: "123",
+      password_confirmation: "123"
+    )
+    visit users_path
+    expect(page).to have_content("jim@email.com")
+
+    click_on "James Lacy"
+    click_on "Edit"
+    fill_in "Email", with: "james@email.com"
+    click_button "Update User"
+    expect(page).to have_content("James")
+    expect(page).to have_content("Lacy")
+    expect(page).to have_content("james@email.com")
+
+  end
+
+  scenario "Delete User" do
+    User.create!(
+      first_name: "James",
+      last_name: "Lacy",
+      email: "jim@email.com",
+      password: "123",
+      password_confirmation: "123"
+    )
+    visit users_path
+    expect(page).to have_content("jim@email.com")
+    click_on "Edit"
+    click_on "Delete User"
+    expect(page).to have_no_content("jim@email.com")
+  end
+
+  scenario "Show User" do
+    User.create!(
+      first_name: "James",
+      last_name: "Lacy",
+      email: "jim@email.com",
+      password: "123",
+      password_confirmation: "123"
+    )
+    visit users_path
+    expect(page).to have_content("jim@email.com")
+    click_on "James Lacy"
+    expect(page).to have_content("jim@email.com")
+    expect(page).to have_content("James Lacy")
+  end
+
+
+
 end
