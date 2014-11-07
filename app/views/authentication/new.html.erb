@@ -5,7 +5,7 @@
 <%= form_tag signin_path do |f| %>
 
   <% if @sign_in_error %>
-    <p class="error_message">
+    <p class="text-danger">
       <%= @sign_in_error %>
     </p>
   <% end %>

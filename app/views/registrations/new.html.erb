@@ -6,7 +6,7 @@
 
   <% if @user.errors.present? %>
     <% @user.errors.full_messages.each do |message| %>
-      <p class="error_message"><%= message %></p>
+      <p class="text-danger"><%= message %></p>
       <% end %>
   <% end %>
 

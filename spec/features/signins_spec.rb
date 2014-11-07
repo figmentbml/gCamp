@@ -15,6 +15,7 @@ feature "Sign In" do
     fill_in "Password", with: "123"
     click_button "Sign in"
     expect(page).to have_content("Sign Out")
+    expect(page).to have_content("James Lacy")
   end
 
   scenario "Sign In without email" do
