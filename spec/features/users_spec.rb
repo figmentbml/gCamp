@@ -17,6 +17,18 @@ feature "Users" do
 
   end
 
+  scenario "Users must have first name, last name, and email" do
+    visit users_path
+    click_on "Create User"
+    fill_in "Password", with: "123"
+    fill_in "Password confirmation", with: "123"
+    click_button "Create User"
+    expect(page).to have_content("First name can't be blank")
+    expect(page).to have_content("Last name can't be blank")
+    expect(page).to have_content("Email can't be blank")
+
+  end
+
   scenario "Edit User from Users Index" do
     User.create!(
       first_name: "James",
