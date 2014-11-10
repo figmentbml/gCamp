@@ -2,15 +2,15 @@
   <%= form_for(@task) do |f| %>
     <% if @task.errors.any? %>
       <div class="form-group">
-      <div class="col-sm-offset-1 col-sm-6 alert alert-danger" role="alert">
-        <h3><%= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:</h3>
-        <ul>
-          <% @task.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-        </ul>
+        <div class="col-sm-offset-1 col-sm-6 alert alert-danger">
+          <h3><%= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:</h3>
+          <ul>
+            <% @task.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
       </div>
-    </div>
     <% end %>
 
     <div class="form-group">

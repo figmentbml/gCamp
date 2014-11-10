@@ -12,6 +12,15 @@ feature "Projects" do
     expect(page).to have_content("Project was successfully created.")
   end
 
+  scenario "Attempts to create project w/o name" do
+    visit root_path
+    click_on "Projects"
+    click_on "Create Project"
+    click_button "Create Project"
+    expect(page).to have_content("Name can't be blank")
+    expect(page).to have_no_content("Project was successfully created.")
+  end
+
   scenario "Create Project and edit" do
     visit root_path
     click_on "Projects"
