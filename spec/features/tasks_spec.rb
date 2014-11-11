@@ -51,6 +51,27 @@ feature "Tasks" do
     expect(page).to have_content("Complete: true")
   end
 
+  scenario "Can't create task with old date from show page and then update with old date" do
+    visit root_path
+    click_on "Tasks"
+    click_on "Create Task"
+    fill_in "Description", with: "puppies"
+    fill_in "Due date", with: Date.today-7
+    click_button "Create Task"
+    expect(page).to have_no_content("puppies")
+    expect(page).to have_content("Due date can't be in the past")
+    fill_in "Due date", with: Date.today+14
+    click_button "Create Task"
+    click_on "Edit"
+    fill_in "Due date", with: Date.today-5
+    check "Complete"
+    click_button "Update Task"
+    expect(page).to have_content("puppies")
+    expect(page).to have_no_content("Due date can't be in the past")
+    expect(page).to have_content("Task was successfully updated")
+  end
+
+
   scenario "Create Task and Edit from index page" do
     Task.create!(
       description: "puppies",
