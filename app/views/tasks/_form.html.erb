@@ -8,14 +8,14 @@
 <%= render "shared/error", instance: @task %>
 
     <div class="form-group">
-      <%= f.label :description, class: "col-sm-1 control-label" %>
+      <%= f.label :description, class: "col-sm-2 control-label" %>
       <div class="col-sm-4">
         <%= f.text_field :description, class: "form-control" %>
       </div>
     </div>
 
     <div class="form-group">
-      <%= f.label :due_date, class: "col-sm-1 control-label" %>
+      <%= f.label :due_date, class: "col-sm-2 control-label" %>
       <div class="col-sm-1">
         <div class="input-group">
           <%= f.date_field :due_date, class: "form-control" %>
@@ -26,7 +26,7 @@
 
     <% unless current_page?(new_task_path) %>
       <div class="form-group">
-        <div class="col-sm-offset-1 col-sm-10">
+        <div class="col-sm-offset-2 col-sm-10">
           <div class="checkbox">
             <label><%= f.check_box :complete %>Complete</label>
           </div>
@@ -35,7 +35,7 @@
     <% end %>
 
     <div class="form-group">
-      <div class="col-sm-offset-1 col-sm-10">
+      <div class="col-sm-offset-2 col-sm-10">
         <br/>
         <%= f.submit name: button_name, class: "btn btn-primary"%>
       </div>
