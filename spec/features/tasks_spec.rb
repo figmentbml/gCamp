@@ -23,6 +23,16 @@ feature "Tasks" do
     expect(page).to have_no_content("Task was successfully created.")
   end
 
+  scenario "Attempt to create task w/o due date" do
+    visit root_path
+    click_on "Tasks"
+    click_on "Create Task"
+    fill_in "Description", with: "test"
+    click_button "Create Task"
+    expect(page).to have_content("test")
+    expect(page).to have_content("Task was successfully created.")
+  end
+
   scenario "Create Task and edit from show page" do
     visit root_path
     click_on "Tasks"

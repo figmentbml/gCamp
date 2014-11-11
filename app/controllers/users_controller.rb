@@ -23,8 +23,11 @@ class UsersController < ApplicationController
 
   def update
     @user.update(user_params)
-    @user.save
-    redirect_to users_path, notice: "User was successfully updated."
+    if @user.save
+      redirect_to users_path, notice: "User was successfully updated."
+    else
+      render :edit
+    end
   end
 
   def destroy
