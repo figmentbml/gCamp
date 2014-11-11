@@ -100,6 +100,29 @@ feature "Users" do
     expect(page).to have_content("James Lacy")
   end
 
+  scenario "Must have unique email" do
+    User.create!(
+      first_name: "James",
+      last_name: "Lacy",
+      email: "jim@email.com",
+      password: "123",
+      password_confirmation: "123"
+    )
+    visit users_path
+    expect(page).to have_content("jim@email.com")
+    click_on "James Lacy"
+    expect(page).to have_content("jim@email.com")
+    expect(page).to have_content("James Lacy")
+    visit users_path
+    click_on "Create User"
+    fill_in "First Name", with: "Jim"
+    fill_in "Last Name", with: "Again"
+    fill_in "Email", with: "jim@email.com"
+    fill_in "Password", with: "456"
+    fill_in "Password confirmation", with: "456"
+    click_button "Create User"
+    expect(page).to have_content("Email has already been taken")
 
+  end
 
 end
