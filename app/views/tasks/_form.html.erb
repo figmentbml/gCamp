@@ -3,7 +3,7 @@
 </div>
 
 <div class="form-horizontal">
-  <%= form_for(@task) do |f| %>
+  <%= form_for [@project, @task] do |f| %>
 
 <%= render "shared/error", instance: @task %>
 
@@ -24,7 +24,7 @@
       </div>
     </div>
 
-    <% unless current_page?(new_task_path) %>
+    <% unless current_page?(new_project_task_path) %>
       <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
           <div class="checkbox">

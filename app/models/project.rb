@@ -1,5 +1,7 @@
 class Project < ActiveRecord::Base
 
-  validates :name, presence: :true
-  
+  has_many :tasks
+
+  validates :name, presence: true
+
 end

@@ -4,3 +4,11 @@
     <%= link_to 'Destroy', project_path(@project), method: :delete, class: "btn btn-danger btn-primary" %>
   </div>
   <h1><%= @project.name %></h1>
+</div>
+
+<ol class="breadcrumb">
+  <li><%= link_to "Projects", projects_path %></li>
+  <li class="active"><%= @project.name %></li>
+</ol>
+
+<%= link_to "Tasks", project_tasks_path(@project, @task) %>

@@ -1,13 +1,16 @@
 class TasksController < ApplicationController
+  before_action do
+    @project = Project.find(params[:project_id])
+  end
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.where(complete: false)
+    @tasks = @project.tasks.where(complete: false)
     @ref = "incomplete"
     if params[:type] == "all"
-      @tasks = Task.all
+      @tasks = @project.tasks
       @ref = "all"
     end
   end
@@ -16,16 +19,16 @@ class TasksController < ApplicationController
   end
 
   def new
-    @task = Task.new
+    @task = @project.tasks.new
   end
 
   def edit
   end
 
   def create
-    @task = Task.new(task_params)
+    @task = @project.tasks.new(task_params)
     if @task.save
-      redirect_to @task, notice: 'Task was successfully created.'
+      redirect_to project_tasks_path, notice: 'Task was successfully created.'
     else
       render :new
     end
@@ -34,7 +37,7 @@ class TasksController < ApplicationController
   def update
     @task.update(task_params)
       if @task.save
-        redirect_to @task, notice: 'Task was successfully updated.'
+        redirect_to project_tasks_path, notice: 'Task was successfully updated.'
       else
         render :edit
       end
@@ -42,15 +45,12 @@ class TasksController < ApplicationController
 
   def destroy
     @task.destroy
-    respond_to do |format|
-      format.html { redirect_to tasks_url, notice: 'Task was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to project_tasks_path, notice: 'Task was successfully destroyed.'
   end
 
   private
     def set_task
-      @task = Task.find(params[:id])
+      @task = @project.tasks.find(params[:id])
     end
 
     def task_params
