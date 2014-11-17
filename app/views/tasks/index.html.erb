@@ -4,7 +4,7 @@
     <%= link_to_if((@ref == "all"), "Incomplete", project_tasks_path(type: "incomplete")) %>
     <%= link_to 'Create Task', new_project_task_path, class: "btn btn-info btn-primary" %>
   </div>
-  <h1>Tasks</h1>
+  <h1>Tasks for <%= @project.name %></h1>
 </div>
 <ol class="breadcrumb">
   <li><%= link_to "Projects", projects_path %></li>
