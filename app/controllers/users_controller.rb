@@ -1,19 +1,17 @@
 class UsersController < ApplicationController
-  before_action do
-    @membership = Membership.find(params[:user_id])
-  end
+
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def index
-    @users = @membership.users
+    @users = User.all
   end
 
   def new
-    @user = @membership.user.new
+    @user = User.new
   end
 
   def create
-    @user = @membership.user.new(user_params)
+    @user = User.new(user_params)
     if @user.save
       redirect_to users_path, notice: 'User was successfully created.'
     else
@@ -22,6 +20,9 @@ class UsersController < ApplicationController
   end
 
   def edit
+  end
+
+  def show
   end
 
   def update
@@ -41,7 +42,7 @@ class UsersController < ApplicationController
 
   private
   def set_user
-    @user = @membership.user.find(params[:id])
+    @user = User.find(params[:id])
   end
 
   def user_params
