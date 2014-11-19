@@ -26,12 +26,18 @@ class MembershipsController < ApplicationController
   end
 
   def update
-    @membership = @project.memberships.find(params[:id])
+    @membership = Membership.find(params[:id])
     if @membership.update(membership_params)
       redirect_to project_memberships_path, notice: "Membership was successfully updated"
     else
       render :edit
     end
+  end
+
+  def destroy
+    @membership = Membership.find(params[:id])
+    @membership.destroy
+    redirect_to project_memberships_path, notice: "Membership was successfully deleted"
   end
 
   private
