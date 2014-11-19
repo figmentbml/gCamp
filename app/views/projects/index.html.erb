@@ -9,6 +9,9 @@
     <tr>
       <th>Name</th>
       <th>
+        Members
+      </th>
+      <th>
         Tasks
       </th>
     </tr>
@@ -17,6 +20,9 @@
     <% @projects.each do |project| %>
       <tr>
         <td><%= link_to project.name, project_path(project) %></td>
+        <td>
+          <%= link_to project.memberships.count, project_memberships_path(project)%>
+        </td>
         <td><%= link_to project.tasks.count, project_tasks_path(project) %>
         </td>
       </tr>
