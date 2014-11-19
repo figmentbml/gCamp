@@ -34,7 +34,11 @@
 
     <div class="container">
       <div class="container">
-        <strong><p class="alert-success text-center"><%= notice %></p></strong>
+        <% if notice %>
+        <div class="alert alert-success text-center" role= "alert">
+        <strong><p><%= notice %></p></strong>
+        </div>
+        <% end %>
         <%= yield %>
       </div>
         <hr>
