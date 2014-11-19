@@ -8,10 +8,10 @@
 </ol>
 
 <div class="form-horizontal">
-<%= render "shared/error", instance: @membership %>
+<%= render "shared/error", instance: @membership, column: "col-sm-6" %>
 </div>
 
-<div class="well form-inline">
+<div class="well form-inline col-sm-5">
   <%= form_for [@project, @membership] do |f| %>
     <div class="form-group">
       <%= f.collection_select(:user_id, User.all, :id, :full_name,
@@ -29,10 +29,10 @@
     <% @memberships.each do |membership| %>
       <%= form_for [@project, membership] do |f| %>
         <tr>
-        <td><%= link_to membership.user.full_name, user_path(membership.user) %></td>
-        <td><%= f.select(:role, ["owner", "member"], {include_blank: membership.role},
+        <td class= "col-sm-2"><%= link_to membership.user.full_name, user_path(membership.user) %></td>
+        <td class= "col-sm-1"><%= f.select(:role, ["owner", "member"], {include_blank: membership.role},
             {class:"form-control"}) %></td>
-        <td><%= f.submit "Update", class: "btn btn-primary" %></td>
+        <td class= "col-sm-1"><%= f.submit "Update", class: "btn btn-primary" %></td>
         <td>
           <%= link_to "", project_membership_path(@project, membership),
           class: "glyphicon glyphicon-remove", method: :delete, data: {confirm:"Are you sure?" }%>
