@@ -1,7 +1,7 @@
 <% if instance.errors.any? %>
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-6 alert alert-danger">
-      <h3><%= pluralize(instance.errors.count, "error") %> prohibited this user from being saved:</h3>
+      <h3><%= pluralize(instance.errors.count, "error") %> prohibited this from being saved:</h3>
       <ul>
         <% instance.errors.full_messages.each do |message| %>
         <li><%= message %></li>

@@ -7,20 +7,21 @@
   <li class="active">Memberships</li>
 </ol>
 
+<div class="form-horizontal">
 <%= render "shared/error", instance: @membership %>
+</div>
 
 <div class="well form-inline">
-<%= form_for [@project, @membership] do |f| %>
-<div class="form-group">
-  <%= f.collection_select(:user_id, User.all, :id, :full_name,
-  {include_blank: "Please select a user..."}, {class:"form-control"}) %>
-</div>
-<div class="form-group">
-  <%= f.select(:role, ["owner", "member"], {}, {class:"form-control"}) %>
-</div>
-
-<%= f.submit "Add New Member", class: "btn btn-primary" %>
-<% end %>
+  <%= form_for [@project, @membership] do |f| %>
+    <div class="form-group">
+      <%= f.collection_select(:user_id, User.all, :id, :full_name,
+      {include_blank: "Please select a user..."}, {class:"form-control"}) %>
+    </div>
+    <div class="form-group">
+      <%= f.select(:role, ["owner", "member"], {}, {class:"form-control"}) %>
+    </div>
+    <%= f.submit "Add New Member", class: "btn btn-primary" %>
+  <% end %>
 </div>
 
 <table class ="table">
