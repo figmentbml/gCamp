@@ -24,7 +24,7 @@
       </div>
     </div>
 
-    <% unless current_page?(new_project_task_path) %>
+    <% unless params[:action] == 'create' || params[:action] == 'new' %>
       <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
           <div class="checkbox">
