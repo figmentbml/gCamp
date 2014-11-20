@@ -8,7 +8,11 @@
 </ol>
 
 <div class="form-horizontal">
-<%= render "shared/error", instance: @membership, column: "col-sm-6" %>
+  <div class="form-group">
+    <div class="col-sm-6">
+      <%= render "shared/error", instance: @membership %>
+    </div>
+  </div>
 </div>
 
 <div class="well form-inline col-sm-5">
