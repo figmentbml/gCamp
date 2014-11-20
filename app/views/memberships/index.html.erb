@@ -30,7 +30,7 @@
       <%= form_for [@project, membership] do |f| %>
         <tr>
         <td class= "col-sm-2"><%= link_to membership.user.full_name, user_path(membership.user) %></td>
-        <td class= "col-sm-1"><%= f.select(:role, ["owner", "member"], {include_blank: membership.role},
+        <td class= "col-sm-2"><%= f.select(:role, ["owner", "member"], {include_blank: membership.role},
             {class:"form-control"}) %></td>
         <td class= "col-sm-1"><%= f.submit "Update", class: "btn btn-primary" %></td>
         <td>

@@ -1,8 +1,7 @@
 require 'rails_helper'
 
 feature "Memberships" do
-
-  scenario "Users can see breadcrumbs on membership index" do
+  before do
     User.create!(
       first_name: "James",
       last_name: "Dean",
@@ -13,6 +12,9 @@ feature "Memberships" do
     Project.create!(
       name: "Singing"
     )
+  end
+
+  scenario "Users can see breadcrumbs on membership index" do
     visit projects_path
     click_on "Singing"
     expect(page).to have_content("Projects" && "Singing")
@@ -20,5 +22,79 @@ feature "Memberships" do
     expect(page).to have_content("Projects" && "Singing" && "Membership")
   end
 
+  scenario "Users can add members to projects" do
+    visit projects_path
+    expect(page).to have_content("Projects")
+    click_on "Singing"
+    expect(page).to have_content("Singing" && "Task" && "Member")
+    click_on "Member"
+    expect(page).to have_content("Singing : Manage Members")
+    select "James Dean", from: "membership_user_id"
+    select "member", from: "membership_role"
+    click_on "Add New Member"
+    expect(page).to have_no_content("error")
+    expect(page).to have_content("James Dean")
+    expect(page).to have_content("member")
+    expect(page).to have_button("Update")
+    expect(page).to have_content("Membership was successfully created")
+  end
+
+  scenario "Users must select users and roles for memberships" do
+    visit projects_path
+    expect(page).to have_content("Projects")
+    click_on "Singing"
+    expect(page).to have_content("Singing" && "Task" && "Member")
+    click_on "Member"
+    expect(page).to have_content("Singing : Manage Members")
+    click_on "Add New Member"
+    expect(page).to have_content("User can't be blank")
+  end
+
+  scenario "Users can change role and delete" do
+    visit projects_path
+    expect(page).to have_content("Projects")
+    click_on "Singing"
+    expect(page).to have_content("Singing" && "Task" && "Member")
+    click_on "Member"
+    expect(page).to have_content("Singing : Manage Members")
+    select "James Dean", from: "membership_user_id"
+    select "member", from: "membership_role"
+    click_on "Add New Member"
+    expect(page).to have_no_content("error")
+    expect(page).to have_content("James Dean")
+    expect(page).to have_content("member")
+    expect(page).to have_button("Update")
+    expect(page).to have_content("Membership was successfully created")
+
+    select "owner", from: "membership_role", match: :prefer_exact
+    click_on "Update"
+    expect(page).to have_content("James Dean")
+    expect(page).to have_content("owner")
+    expect(page).to have_content("Membership was successfully updated")
+
+    find('.glyphicon').click
+    expect(page).to have_content("Membership was successfully deleted")
+  end
+
+  scenario "Users cannot add the same member to a project twice" do
+    visit projects_path
+    expect(page).to have_content("Projects")
+    click_on "Singing"
+    click_on "Member"
+    expect(page).to have_content("Singing : Manage Members")
+    select "James Dean", from: "membership_user_id"
+    select "member", from: "membership_role"
+    click_on "Add New Member"
+    expect(page).to have_no_content("error")
+    expect(page).to have_content("James Dean")
+    expect(page).to have_content("member")
+    expect(page).to have_button("Update")
+    expect(page).to have_content("Membership was successfully created")
+
+    select "James Dean", from: "membership_user_id"
+    select "owner", from: "membership_role", match: :prefer_exact
+    click_on "Add New Member"
+    expect(page).to have_content("User should only have one membership per project")
+  end
 
 end
