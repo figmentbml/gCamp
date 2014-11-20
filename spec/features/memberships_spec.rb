@@ -66,7 +66,9 @@ feature "Memberships" do
     expect(page).to have_button("Update")
     expect(page).to have_content("Membership was successfully created")
 
-    select "owner", from: "membership_role", match: :prefer_exact
+    within '.table' do
+       select "owner", from: "membership_role"
+    end
     click_on "Update"
     expect(page).to have_content("James Dean")
     expect(page).to have_content("owner")
@@ -92,7 +94,9 @@ feature "Memberships" do
     expect(page).to have_content("Membership was successfully created")
 
     select "James Dean", from: "membership_user_id"
-    select "owner", from: "membership_role", match: :prefer_exact
+    within '.table' do
+       select "owner", from: "membership_role"
+    end
     click_on "Add New Member"
     expect(page).to have_content("User should only have one membership per project")
   end
