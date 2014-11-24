@@ -32,7 +32,8 @@
         </div>
     </div>
 
-    <% #if new_user_path or signup_path %>
+    <% if @user.id %>
+    <% else %>
       <div class="form-group">
         <%= f.label :password, class: "col-sm-2 control-label" %>
           <div class="col-sm-4">
