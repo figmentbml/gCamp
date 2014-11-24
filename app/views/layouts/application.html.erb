@@ -33,38 +33,36 @@
     </div>
 
     <div class="container">
-      <div class="container">
-        <% if notice %>
+      <% if notice %>
         <div class="alert alert-success text-center" role= "alert">
-        <strong><p><%= notice %></p></strong>
+          <strong><p><%= notice %></p></strong>
         </div>
-        <% end %>
-        <%= yield %>
+      <% end %>
+      <%= yield %>
+      <hr>
+      <div class="footer">
+        <div>
+          <%= link_to("About", about_path) %>    |
+          <%= link_to("Terms", terms_path) %>    |
+          <%= link_to("FAQ", faq_path) %>        |
+          <%= link_to("Users", users_path) %>    |
+          <%= link_to("Projects", projects_path) %>
+        </div>
+        <div class= "pull-right">
+          <%= link_to "http://www.linkedin.com/in/bethjaswa/" do %>
+            <%= image_tag("linked_in.png") %>
+          <% end %> |
+          <%= link_to "http://www.github.com/figmentbml" do %>
+            <%= image_tag("GitHub.png") %>
+          <% end %> |
+          <%= link_to "http://www.twitter.com/@figmentbml" do %>
+            <%= image_tag("Twitter_logo.png") %>
+          <% end %> |
+          <%= link_to "http://www.galvanize.it/school" do %>
+            <%= image_tag("gschool_logo.png") %>
+          <% end %>
+        </div>
       </div>
-        <hr>
-        <div class="footer">
-          <div>
-            <%= link_to("About", about_path) %>    |
-            <%= link_to("Terms", terms_path) %>    |
-            <%= link_to("FAQ", faq_path) %>        |
-            <%= link_to("Users", users_path) %>    |
-            <%= link_to("Projects", projects_path) %>
-          </div>
-          <div class= "pull-right">
-            <%= link_to "http://www.linkedin.com/in/bethjaswa/" do %>
-              <%= image_tag("linked_in.png") %>
-            <% end %> |
-            <%= link_to "http://www.github.com/figmentbml" do %>
-              <%= image_tag("GitHub.png") %>
-            <% end %> |
-            <%= link_to "http://www.twitter.com/@figmentbml" do %>
-              <%= image_tag("Twitter_logo.png") %>
-            <% end %> |
-            <%= link_to "http://www.galvanize.it/school" do %>
-              <%= image_tag("gschool_logo.png") %>
-            <% end %>
-          </div>
-        </div>
     </div>
   </body>
 </html>
