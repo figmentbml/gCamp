@@ -36,7 +36,7 @@ feature "Memberships" do
     expect(page).to have_content("James Dean")
     expect(page).to have_content("member")
     expect(page).to have_button("Update")
-    expect(page).to have_content("Membership was successfully created")
+    expect(page).to have_content(" was successfully created")
   end
 
   scenario "Users must select users and roles for memberships" do
@@ -64,7 +64,7 @@ feature "Memberships" do
     expect(page).to have_content("James Dean")
     expect(page).to have_content("member")
     expect(page).to have_button("Update")
-    expect(page).to have_content("Membership was successfully created")
+    expect(page).to have_content(" was successfully created")
 
     within '.table' do
        select "owner", from: "membership_role"
@@ -72,10 +72,10 @@ feature "Memberships" do
     click_on "Update"
     expect(page).to have_content("James Dean")
     expect(page).to have_content("owner")
-    expect(page).to have_content("Membership was successfully updated")
+    expect(page).to have_content(" was successfully updated")
 
     find('.glyphicon').click
-    expect(page).to have_content("Membership was successfully deleted")
+    expect(page).to have_content(" was successfully deleted")
   end
 
   scenario "Users cannot add the same member to a project twice" do
@@ -91,7 +91,7 @@ feature "Memberships" do
     expect(page).to have_content("James Dean")
     expect(page).to have_content("member")
     expect(page).to have_button("Update")
-    expect(page).to have_content("Membership was successfully created")
+    expect(page).to have_content(" was successfully created")
 
     select "James Dean", from: "membership_user_id"
     within '.table' do
