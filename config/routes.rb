@@ -6,6 +6,9 @@ Rails.application.routes.draw do
     resources :memberships
   end
 
+  resources :comments
+#  post '/projects/:project_id/tasks/:id(.:format)' => "tasks#create"
+
   root "pages#index"
   get "/about" => "pages#about", as: :about
   get "/terms" => "pages#terms", as: :terms
