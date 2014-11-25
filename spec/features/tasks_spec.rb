@@ -117,7 +117,7 @@ feature "Tasks" do
     click_button "Create Task"
     expect(page).to have_content("puppies")
     expect(page).to have_content("Task was successfully created")
-    click_on "Destroy"
+    find('.glyphicon').click
     expect(page).to have_no_content("puppies")
     expect(page).to have_content("Task was successfully destroyed")
   end
@@ -160,9 +160,19 @@ feature "Tasks" do
     click_on "puppies"
     expect(page).to have_content("puppies" && "Show" && "Comments")
     expect(page).to have_button("Add Comment")
-    fill_in "Comment Body", with: "omg I love red collars!"
+    fill_in "comment_comment_body", with: "omg I love red collars!"
+    click_on "Add Comment"
     expect(page).to have_content("omg I love red collars!")
     expect(page).to have_link("James Lacy")
+    fill_in "comment_comment_body", with: "I hate blue jackets"
+    click_on "Add Comment"
+    expect(page).to have_content("I hate blue jackets")
+    expect(page).to have_link("James Lacy")
+
+    click_on "Tasks"
+    within 'span.badge' do
+      expect(page).to have_content('2')
+    end
   end
 
   scenario "Users that aren't logged in can't add comments" do
@@ -180,6 +190,26 @@ feature "Tasks" do
     click_on "puppies"
     expect(page).to have_content("puppies" && "Show" && "Comments")
     expect(page).to have_no_button("Add Comment")
+  end
+
+  scenario "Users can see breadcrumbs on task index & show pages" do
+    visit projects_path
+    click_on "dogs!"
+    click_on "Task"
+    expect(page).to have_content("Projects" && "dogs!" && "Task")
+    click_on "Create Task"
+    fill_in "Description", with: "puppies"
+    fill_in "Due date", with: "09/20/2014"
+    click_button "Create Task"
+    expect(page).to have_content("puppies")
+
+    click_on "dogs!"
+    click_on "Task"
+    click_on "puppies"
+    expect(page).to have_content("puppies" && "Projects" && "dogs!" && "Show" && "Comments")
+    expect(page).to have_no_button("Add Comment")
+    expect(page).to have_no_link("Back")
+    expect(page).to have_content("Edit")
   end
 
 

@@ -30,7 +30,10 @@
               <tr>
             <% end %>
             <% end %>
-              <td><%= link_to task.description, project_task_path(task.project, task) %></td>
+              <td>
+                <%= link_to task.description, project_task_path(task.project, task) %>
+                <span class="badge"><%= task.comments.count %></span>
+              </td>
               <td><%= task.complete %></td>
               <td>
                 <% if task.due_date %>
@@ -41,7 +44,9 @@
                 <td>
                   <div class= "pull-right">
                   <%= link_to 'Edit', edit_project_task_path(task.project, task), class:"btn btn-info" %>
-                  <%= link_to 'Destroy', project_task_path(task.project, task), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+                  <%= link_to "", project_task_path(task.project, task),
+                  class: "glyphicon glyphicon-remove", method: :delete,
+                    data: {confirm:"Are you sure?" }%>
                   </div>
               </td>
             </tr>
