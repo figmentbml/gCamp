@@ -5,6 +5,13 @@ feature "Tasks" do
     Project.create!(
       name: "dogs!",
     )
+    User.create!(
+      first_name: "James",
+      last_name: "Lacy",
+      email: "jim@email.com",
+      password: "123",
+      password_confirmation: "123"
+    )
   end
 
   scenario "Create Task" do
@@ -129,6 +136,50 @@ feature "Tasks" do
     click_on "Incomplete"
     expect(page).to have_content("puppies")
     expect(page).to have_content("false")
+  end
+
+  scenario "Logged in users can create & see comment on task show page" do
+    visit signin_path
+    fill_in "Email", with: "jim@email.com"
+    fill_in "Password", with: "123"
+    click_button "Sign in"
+    expect(page).to have_content("Sign Out")
+    expect(page).to have_content("James Lacy")
+
+    visit projects_path
+    click_on "dogs!"
+    click_on "Task"
+    click_on "Create Task"
+    fill_in "Description", with: "puppies"
+    fill_in "Due date", with: "09/20/2014"
+    click_button "Create Task"
+    expect(page).to have_content("puppies")
+
+    click_on "dogs!"
+    click_on "Task"
+    click_on "puppies"
+    expect(page).to have_content("puppies" && "Show" && "Comments")
+    expect(page).to have_button("Add Comment")
+    fill_in "Comment Body", with: "omg I love red collars!"
+    expect(page).to have_content("omg I love red collars!")
+    expect(page).to have_link("James Lacy")
+  end
+
+  scenario "Users that aren't logged in can't add comments" do
+    visit projects_path
+    click_on "dogs!"
+    click_on "Task"
+    click_on "Create Task"
+    fill_in "Description", with: "puppies"
+    fill_in "Due date", with: "09/20/2014"
+    click_button "Create Task"
+    expect(page).to have_content("puppies")
+
+    click_on "dogs!"
+    click_on "Task"
+    click_on "puppies"
+    expect(page).to have_content("puppies" && "Show" && "Comments")
+    expect(page).to have_no_button("Add Comment")
   end
 
 
