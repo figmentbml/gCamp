@@ -91,7 +91,7 @@ feature "Tasks" do
     click_button "Create Task"
     expect(page).to have_content("puppies")
     expect(page).to have_content("Task was successfully created")
-    click_on "Show"
+    click_on "puppies"
     click_on "Edit"
     fill_in "Description", with: "kittens"
     click_button "Update Task"
