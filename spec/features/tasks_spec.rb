@@ -138,7 +138,8 @@ feature "Tasks" do
     expect(page).to have_content("false")
   end
 
-  scenario "Logged in users can create & see comment on task show page" do
+  scenario "Logged in users can create & see comment on task show page &
+  deleted users's comments show up as (deleted user)" do
     visit signin_path
     fill_in "Email", with: "jim@email.com"
     fill_in "Password", with: "123"
@@ -173,6 +174,25 @@ feature "Tasks" do
     within 'span.badge' do
       expect(page).to have_content('2')
     end
+
+    visit about_path
+    expect(page).to have_content("1 Project" && "1 Task" && "2 Comments" && "1 User")
+
+    visit users_path
+    click_on "Edit"
+    expect(page).to have_content("James Lacy")
+    click_on "Delete User"
+    expect(page).to have_content("successfully deleted")
+
+    visit projects_path
+    click_on "dogs!"
+    click_on "Task"
+    click_on "puppies"
+    expect(page).to have_content("puppies" && "Show" && "Comments")
+    expect(page).to have_content("(deleted user)")
+
+    visit about_path
+    expect(page).to have_content("0 Project" && "0 Task" && "0 Comments" && "0 User")
   end
 
   scenario "Users that aren't logged in can't add comments" do

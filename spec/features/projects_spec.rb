@@ -55,7 +55,7 @@ feature "Projects" do
     expect(page).to have_content("1 Task")
 
     visit about_path
-    expect(page).to have_content("1 Project, 1 Task")
+    expect(page).to have_content("1 Project" && "1 Task")
 
     visit projects_path
     expect(page).to have_content("dogs!")
