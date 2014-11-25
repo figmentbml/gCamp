@@ -37,15 +37,40 @@ feature "Projects" do
     expect(page).to have_content("Project was successfully updated.")
   end
 
-  scenario "Delete project" do
+  scenario "Delete project, deletes related tasks" do
     Project.create!(
-      name: "puppies",
+      name: "dogs!",
     )
     visit projects_path
-    expect(page).to have_content("puppies")
-    click_on "puppies"
-    click_on "Destroy"
-    expect(page).to have_no_content("puppies")
+    click_on "dogs!"
+    click_on "0 Tasks"
+    click_on "Create Task"
+    fill_in "Description", with: "take for a walk"
+    fill_in "Due date", with: Date.today+7
+    click_button "Create Task"
+    expect(page).to have_content("take for a walk")
+    expect(page).to have_content("Task was successfully created.")
+    visit projects_path
+    click_on "dogs!"
+    expect(page).to have_content("1 Task")
+    # within 'span.badge' do
+    #   expect(page).to have_content("1")
+    # end
+
+    visit about_path
+    expect(page).to have_content("1 Project, 1 Task")
+
+    visit projects_path
+    expect(page).to have_content("dogs!")
+    click_on "dogs!"
+    within '.well' do
+      expect(page).to have_content("Deleting this project will also delete")
+      click_on "Delete"
+    end
+    expect(page).to have_no_content("dogs!")
+
+    visit about_path
+    expect(page).to have_content("0 Project" && "0 Task")
   end
 
 end
