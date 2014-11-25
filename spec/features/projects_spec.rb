@@ -53,9 +53,6 @@ feature "Projects" do
     visit projects_path
     click_on "dogs!"
     expect(page).to have_content("1 Task")
-    # within 'span.badge' do
-    #   expect(page).to have_content("1")
-    # end
 
     visit about_path
     expect(page).to have_content("1 Project, 1 Task")

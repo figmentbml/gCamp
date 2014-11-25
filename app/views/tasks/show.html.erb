@@ -30,7 +30,11 @@
   <div class="row">
     <div class="col-md-3">
       <p>
-      <strong><%= link_to comment.user.full_name, user_path(comment.user) %></strong>
+        <% if comment.user == nil %>
+          <strong>(deleted user)</strong>
+        <% else %>
+          <strong><%= link_to comment.user.full_name, user_path(comment.user) %></strong>
+        <% end %>
       </p>
       <p class= "text-muted">
         <%=  time_ago_in_words(comment.created_at) %>
