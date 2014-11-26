@@ -22,8 +22,8 @@
     <strong>Delete Project</strong>
   </p>
   <p>
-    Deleting this project will also delete <%= pluralize(Membership.count, "membership") %>,
-     <%= pluralize(Task.count, "task") %>, and associated comments.
+    Deleting this project will also delete <%= pluralize(@project.memberships.count, "membership") %>,
+     <%= pluralize(@project.tasks.count, "task") %>, and associated comments.
   </p>
   <%= link_to 'Delete', project_path(@project), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger btn-primary" %>
 </div>
