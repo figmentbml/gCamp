@@ -8,7 +8,7 @@ namespace :memberships do
     p User.where(first_name: nil)
   end
 
-  desc "Deletes invalid memberships and comments"
+  desc "Deletes invalid memberships, users, and tasks"
   task delete: :environment do
     Membership.where(role: "true").delete_all
     Membership.where.not(user_id: User.all).delete_all

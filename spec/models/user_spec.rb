@@ -46,7 +46,6 @@ describe "User" do
     user.email = "dEAN@emAIl.com"
     expect(user.valid?).to be(true)
     expect(user.errors[:email].present?).to eq(false)
-
   end
 
 
