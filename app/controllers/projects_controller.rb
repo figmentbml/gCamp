@@ -1,4 +1,4 @@
-class ProjectsController < ApplicationController
+class ProjectsController < InternalController
 
   def index
     @projects = Project.all

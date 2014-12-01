@@ -1,4 +1,4 @@
-class MembershipsController < ApplicationController
+class MembershipsController < InternalController
   before_action do
     @project = Project.find(params[:project_id])
   end
