@@ -1,32 +1,34 @@
-<div class="well well-lg col-md-4 col-md-offset-4">
-  <h1>Sign into gCamp!</h1>
+<div class= "row">
+  <div class="well well-lg col-md-4 col-md-offset-4">
+    <h1>Sign into gCamp!</h1>
+    <br/>
+
+  <%= form_tag signin_path do |f| %>
+
+    <% if @sign_in_error %>
+      <p class="text-danger">
+        <%= @sign_in_error %>
+      </p>
+    <% end %>
+
+    <div class="form-group">
+      <%= label_tag :email %>
+    </div>
+    <div>
+      <%= email_field_tag :email, nil, class:"form-control" %>
+    </div>
   <br/>
+    <div class="form-group">
+      <%= label_tag :password %>
+    </div>
+    <div>
+      <%= password_field_tag :password, nil, class:"form-control" %>
+    </div>
+  <br/>
+    <div class="form-group">
+      <%= submit_tag "Sign in", class: "btn btn-primary" %>
+    </div>
 
-<%= form_tag signin_path do |f| %>
-
-  <% if @sign_in_error %>
-    <p class="text-danger">
-      <%= @sign_in_error %>
-    </p>
   <% end %>
-
-  <div class="form-group">
-    <%= label_tag :email %>
   </div>
-  <div>
-    <%= email_field_tag :email, nil, class:"form-control" %>
-  </div>
-<br/>
-  <div class="form-group">
-    <%= label_tag :password %>
-  </div>
-  <div>
-    <%= password_field_tag :password, nil, class:"form-control" %>
-  </div>
-<br/>
-  <div class="form-group">
-    <%= submit_tag "Sign in", class: "btn btn-primary" %>
-  </div>
-
-<% end %>
 </div>

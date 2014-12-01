@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 20141124202835) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.integer  "task_id"
-    t.string   "comment_body"
+    t.text     "comment_body"
   end
 
   create_table "members", force: true do |t|
