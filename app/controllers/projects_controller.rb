@@ -16,6 +16,7 @@ class ProjectsController < InternalController
     @project = Project.new(project_params)
     if @project.save
       redirect_to project_tasks_path(@project), notice: "Project was successfully created."
+      Membership.create(project_id: @project.id, user_id: current_user.id, role: "owner")
     else
       render :new
     end
