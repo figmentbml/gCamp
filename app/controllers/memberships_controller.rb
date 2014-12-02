@@ -3,6 +3,8 @@ class MembershipsController < InternalController
     @project = Project.find(params[:project_id])
   end
 
+  before_action :tasks_id_match
+
   def index
     @membership = @project.memberships.new
     @memberships = @project.memberships.all

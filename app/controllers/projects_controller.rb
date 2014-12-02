@@ -1,5 +1,5 @@
 class ProjectsController < InternalController
-  before_action :membership_id_match, except: [:index, :new, :create]
+  before_action :project_id_match, except: [:index, :new, :create]
 
   def index
     @projects = Project.all
@@ -47,18 +47,6 @@ private
 
   def project_params
     params.required(:project).permit(:name)
-  end
-
-  def memberships
-    @memberships = Membership.all
-  end
-
-  def membership_id_match
-    project_list = Membership.where(user_id: current_user.id).pluck(:project_id)
-    @project = Project.find(params[:id])
-    unless project_list.include?(@project.id)
-      raise AccessDenied
-    end
   end
 
 end

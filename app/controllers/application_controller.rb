@@ -18,4 +18,27 @@ class ApplicationController < ActionController::Base
     render 'public/404', status: :not_found, layout: false
   end
 
+  private
+
+  def memberships
+    @memberships = Membership.all
+  end
+
+  def project_id_match
+    project_list = Membership.where(user_id: current_user.id).pluck(:project_id)
+    @project = Project.find(params[:id])
+    unless project_list.include?(@project.id)
+      raise AccessDenied
+    end
+  end
+
+  def tasks_id_match
+    project_list = Membership.where(user_id: current_user.id).pluck(:project_id)
+    @project = Project.find(params[:project_id])
+    unless project_list.include?(@project.id)
+      raise AccessDenied
+    end
+  end
+
+
 end

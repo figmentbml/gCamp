@@ -3,6 +3,7 @@ class TasksController < InternalController
     @project = Project.find(params[:project_id])
   end
   before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :tasks_id_match
 
   # GET /tasks
   # GET /tasks.json
