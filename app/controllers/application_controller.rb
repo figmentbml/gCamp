@@ -34,7 +34,6 @@ class ApplicationController < ActionController::Base
 
   def tasks_id_match
     project_list = Membership.where(user_id: current_user.id).pluck(:project_id)
-    @project = Project.find(params[:project_id])
     unless project_list.include?(@project.id)
       raise AccessDenied
     end

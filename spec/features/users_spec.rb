@@ -1,128 +1,77 @@
 require 'rails_helper'
 
 feature "Users" do
-
-  scenario "Create User" do
-    visit users_path
-    click_on "Create User"
-    fill_in "First Name", with: "James"
-    fill_in "Last Name", with: "Lacy"
-    fill_in "Email", with: "jim@email.com"
+  before do
+    User.create!(
+    first_name: "James",
+    last_name: "Dean",
+    email: "dean@email.com",
+    password: "123",
+    password_confirmation: "123"
+    )
+    User.create!(
+    first_name: "Betty",
+    last_name: "Boop",
+    email: "betty@email.com",
+    password: "123",
+    password_confirmation: "123"
+    )
+    visit signin_path
+    fill_in "Email", with: "dean@email.com"
     fill_in "Password", with: "123"
-    fill_in "Password confirmation", with: "123"
-    click_button "Create User"
-    expect(page).to have_content("jim@email.com")
-    expect(page).to have_content("James")
-    expect(page).to have_content("Lacy")
-
-  end
-
-  scenario "Users must have first name, last name, and email" do
-    visit users_path
-    click_on "Create User"
-    fill_in "Password", with: "123"
-    fill_in "Password confirmation", with: "123"
-    click_button "Create User"
-    expect(page).to have_content("First name can't be blank")
-    expect(page).to have_content("Last name can't be blank")
-    expect(page).to have_content("Email can't be blank")
-
+    click_button "Sign in"
+    expect(page).to have_content("Sign Out")
+    expect(page).to have_content("James Dean")
   end
 
   scenario "Edit User from Users Index" do
-    User.create!(
-      first_name: "James",
-      last_name: "Lacy",
-      email: "jim@email.com",
-      password: "123",
-      password_confirmation: "123"
-    )
     visit users_path
-    expect(page).to have_content("jim@email.com")
+    expect(page).to have_content("dean@email.com")
 
-    click_on "Edit"
+    within 'table tr', text: "James Dean" do
+      click_on "Edit"
+    end
     fill_in "Email", with: "james@email.com"
     click_button "Update User"
     expect(page).to have_content("James")
-    expect(page).to have_content("Lacy")
+    expect(page).to have_content("Dean")
     expect(page).to have_content("james@email.com")
-
   end
 
   scenario "Edit User from User Show" do
-    User.create!(
-      first_name: "James",
-      last_name: "Lacy",
-      email: "jim@email.com",
-      password: "123",
-      password_confirmation: "123"
-    )
     visit users_path
-    expect(page).to have_content("jim@email.com")
+    expect(page).to have_content("dean@email.com")
 
-    click_on "James Lacy"
+    within 'table tr', text: "James Dean" do
+      click_on "James Dean"
+    end
     click_on "Edit"
     fill_in "Email", with: "james@email.com"
     click_button "Update User"
     expect(page).to have_content("James")
-    expect(page).to have_content("Lacy")
+    expect(page).to have_content("Dean")
     expect(page).to have_content("james@email.com")
 
   end
 
   scenario "Delete User" do
-    User.create!(
-      first_name: "James",
-      last_name: "Lacy",
-      email: "jim@email.com",
-      password: "123",
-      password_confirmation: "123"
-    )
     visit users_path
-    expect(page).to have_content("jim@email.com")
-    click_on "Edit"
+    expect(page).to have_content("dean@email.com")
+    within 'table tr', text: "James Dean" do
+      click_on "Edit"
+    end
     click_on "Delete User"
-    expect(page).to have_no_content("jim@email.com")
+    expect(page).to have_no_content("dean@email.com")
   end
 
   scenario "Show User" do
-    User.create!(
-      first_name: "James",
-      last_name: "Lacy",
-      email: "jim@email.com",
-      password: "123",
-      password_confirmation: "123"
-    )
     visit users_path
-    expect(page).to have_content("jim@email.com")
-    click_on "James Lacy"
-    expect(page).to have_content("jim@email.com")
-    expect(page).to have_content("James Lacy")
-  end
-
-  scenario "Must have unique email" do
-    User.create!(
-      first_name: "James",
-      last_name: "Lacy",
-      email: "jim@email.com",
-      password: "123",
-      password_confirmation: "123"
-    )
-    visit users_path
-    expect(page).to have_content("jim@email.com")
-    click_on "James Lacy"
-    expect(page).to have_content("jim@email.com")
-    expect(page).to have_content("James Lacy")
-    visit users_path
-    click_on "Create User"
-    fill_in "First Name", with: "Jim"
-    fill_in "Last Name", with: "Again"
-    fill_in "Email", with: "jim@email.com"
-    fill_in "Password", with: "456"
-    fill_in "Password confirmation", with: "456"
-    click_button "Create User"
-    expect(page).to have_content("Email has already been taken")
-
+    expect(page).to have_content("dean@email.com")
+    within 'table tr', text: "James Dean" do
+      click_on "James Dean"
+    end
+    expect(page).to have_content("dean@email.com")
+    expect(page).to have_content("James Dean")
   end
 
 end

@@ -12,48 +12,49 @@
   <li class="active">Tasks</li>
 </ol>
 <table class="table">
-    <thead>
-      <tr>
-        <th>Description</th>
-        <th>Complete</th>
-        <th>Due</th>
-      </tr>
-    </thead>
-    <tbody>
-      <div class="col-md-12">
-        <div class="row">
-          <% @tasks.each do |task| %>
-            <% if task.due_date != nil %>
-              <% if task.due_date >= Date.today && task.due_date <= Date.today+6 %>
-              <tr class = "alert alert-danger" >
-              <% else %>
-              <tr>
+  <thead>
+    <tr>
+      <th>Description</th>
+      <th>Complete</th>
+      <th>Due</th>
+    </tr>
+  </thead>
+  <tbody>
+    <div class="col-md-12">
+      <div class="row">
+        <% @tasks.each do |task| %>
+        <% if task.due_date != nil %>
+        <% if task.due_date >= Date.today && task.due_date <= Date.today+6 %>
+        <tr class = "alert alert-danger" >
+          <% else %>
+        </tr>
+        <tr>
+          <% end %>
+          <% end %>
+          <td>
+            <%= link_to task.description, project_task_path(task.project, task) %>
+            <span class="badge"><%= task.comments.count %></span>
+          </td>
+          <td><%= task.complete %></td>
+          <td>
+            <% if task.due_date %>
+            <%= task.due_date.strftime("%m/%d/%Y") %>
+            <% else nil %>
             <% end %>
-            <% end %>
-              <td>
-                <%= link_to task.description, project_task_path(task.project, task) %>
-                <span class="badge"><%= task.comments.count %></span>
-              </td>
-              <td><%= task.complete %></td>
-              <td>
-                <% if task.due_date %>
-                  <%= task.due_date.strftime("%m/%d/%Y") %>
-                  <% else nil %>
-                  <% end %>
-                </td>
-                <td>
-                  <div class= "pull-right">
-                  <%= link_to 'Edit', edit_project_task_path(task.project, task), class:"btn btn-info" %>
-                  <%= link_to "", project_task_path(task.project, task),
-                  class: "glyphicon glyphicon-remove", method: :delete,
-                    data: {confirm:"Are you sure?" }%>
-                  </div>
-              </td>
-            </tr>
+          </td>
+          <td>
+            <div class= "pull-right">
+              <%= link_to 'Edit', edit_project_task_path(task.project, task), class:"btn btn-info" %>
+              <%= link_to "", project_task_path(task.project, task),
+              class: "glyphicon glyphicon-remove", method: :delete,
+                data: {confirm:"Are you sure?" }%>
+              </div>
+            </td>
+          </tr>
           <% end %>
         </div>
       </div>
     </tbody>
-</table>
+  </table>
 
-<br>
+  <br>
