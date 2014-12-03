@@ -7,6 +7,10 @@ class ApplicationController < ActionController::Base
     User.find_by(id: session[:user_id])
   end
 
+  def owner?
+    @project.memberships.where(role: 'owner', user_id: current_user)
+  end
+
   helper_method :current_user
 
   class AccessDenied < StandardError
