@@ -4,7 +4,7 @@ class MembershipsController < InternalController
   end
   before_action :current_user, only: [:show, :destroy]
   before_action :tasks_id_match
-  before_action :not_owner_render_404, only: [:new, :create, :edit, :update, :destroy]
+  before_action :not_owner_render_404, only: [:new, :create, :edit, :update]
 
 
   def index
@@ -42,8 +42,15 @@ class MembershipsController < InternalController
 
   def destroy
     @membership = Membership.find(params[:id])
-    @membership.destroy
-    redirect_to project_memberships_path, notice: "#{@membership.user.full_name} was successfully deleted"
+    if current_user_has_membership?
+      @membership.destroy
+      redirect_to projects_path,
+      notice: "#{@membership.user.full_name} was successfully deleted"
+    else
+      @membership.destroy
+      redirect_to project_memberships_path,
+      notice: "#{@membership.user.full_name} was successfully deleted"
+    end
   end
 
   private
@@ -58,8 +65,12 @@ class MembershipsController < InternalController
 
   def not_owner_render_404
     if owner?.empty?
-      render 'public/404', status: :not_found, layout: false
+      raise AccessDenied
     end
+  end
+
+  def current_user_has_membership?
+    @membership.user.id == current_user.id
   end
 
 end
