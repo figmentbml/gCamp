@@ -7,4 +7,22 @@ class Membership < ActiveRecord::Base
     message: "should only have one membership per project" }
   validates :role, presence: :true
 
+  before_destroy :cannot_delete_last_owner
+
+  private
+
+  def owners
+    project.memberships.where(role: 'owner')
+  end
+
+  def members
+    project.memberships.where(role: 'member')
+  end
+
+  def cannot_delete_last_owner
+    if owners.count == 1 && role == 'owner'
+      return false
+    end
+  end
+
 end

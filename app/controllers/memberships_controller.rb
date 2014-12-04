@@ -6,7 +6,6 @@ class MembershipsController < InternalController
   before_action :tasks_id_match
   before_action :not_owner_render_404, only: [:new, :create, :edit, :update]
 
-
   def index
     @membership = @project.memberships.new
     @memberships = @project.memberships.all
@@ -43,15 +42,20 @@ class MembershipsController < InternalController
 
   def destroy
     @membership = Membership.find(params[:id])
-    if current_user_has_membership?
-      @membership.destroy
-      redirect_to projects_path,
-      notice: "#{@membership.user.full_name} was successfully deleted"
+
+    if @membership.destroy
+      if current_user_has_membership?
+        redirect_to projects_path,
+        notice: "#{@membership.user.full_name} was successfully deleted"
+      else
+        redirect_to project_memberships_path,
+        notice: "#{@membership.user.full_name} was successfully deleted"
+      end
     else
-      @membership.destroy
       redirect_to project_memberships_path,
-      notice: "#{@membership.user.full_name} was successfully deleted"
+      notice: "You can't delete the last owner.  Please add another owner first."
     end
+    
   end
 
   private
