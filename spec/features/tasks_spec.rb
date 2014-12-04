@@ -172,6 +172,7 @@ feature "Tasks" do
 
   scenario "Logged in users can create & see comment on task show page &
   deleted users's comments show up as (deleted user)" do
+  skip
   visit projects_path
   within '.table' do
     click_link "dogs!"

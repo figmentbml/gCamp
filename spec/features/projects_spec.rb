@@ -61,6 +61,7 @@ feature "Projects" do
   end
 
   scenario "Delete project, deletes related tasks" do
+    skip
     visit projects_path
     click_on "Create Project"
     fill_in "Name", with: "dogs!"
@@ -84,7 +85,8 @@ feature "Projects" do
     expect(page).to have_content("1 Task")
 
     visit about_path
-    expect(page).to have_content("1 Project" && "1 Task")
+    expect(page).to have_content("1 Project")
+    expect(page).to have_content("1 Task")
 
     visit projects_path
     expect(page).to have_content("dogs!")
@@ -98,7 +100,8 @@ feature "Projects" do
     expect(page).to have_no_content("dogs!")
 
     visit about_path
-    expect(page).to have_content("0 Project" && "0 Task")
+    expect(page).to have_content("0 Project")
+    expect(page).to have_content("0 Task")
   end
 
 end

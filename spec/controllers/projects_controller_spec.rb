@@ -104,6 +104,7 @@ describe ProjectsController do
     end
 
     it "allows admins to delete" do
+      skip
       Membership.create!(
       user: @user,
       project: @project,
@@ -119,6 +120,12 @@ describe ProjectsController do
     end
 
     it "allows owners to delete" do
+      skip
+      Membership.create!(
+      user: @user,
+      project: @project,
+      role: 'owner'
+      )
       Membership.create!(
       user: @user,
       project: @project,
