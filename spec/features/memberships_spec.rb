@@ -90,6 +90,17 @@ feature "Memberships" do
     expect(page).to have_content("James Dean")
     expect(page).to have_content("member")
     expect(page).to have_content(" was successfully updated")
+  end
+
+  scenario "Owners can delete memberships" do
+    visit projects_path
+    expect(page).to have_content("Projects")
+    within 'table.table' do
+      click_link "Singing"
+    end
+    expect(page).to have_content("Singing" && "Task" && "Member")
+    click_on "Member"
+    expect(page).to have_content("Singing : Manage Members")
     within '.well' do
       select "Betty Boop", from: "membership_user_id"
       select "member", from: "membership_role"

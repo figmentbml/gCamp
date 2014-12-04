@@ -2,6 +2,14 @@ require 'rails_helper'
 
 describe ProjectsController do
 
+  describe "#index" do
+    it "doesn't allow non-logged in users to view" do
+      get :index
+
+      expect(response).to redirect_to(signin_path)
+    end
+  end
+
   describe "#edit" do
     before do
       @user = User.create!(
@@ -96,7 +104,6 @@ describe ProjectsController do
     end
 
     it "allows admins to delete" do
-      skip
       Membership.create!(
       user: @user,
       project: @project,
@@ -107,12 +114,11 @@ describe ProjectsController do
 
       delete :destroy, id: @project.id
 
-      expect(count).to eq(count - 1)
+      expect(Project.count).to eq(count - 1)
       expect(response).to redirect_to(projects_path)
     end
 
     it "allows owners to delete" do
-      skip
       Membership.create!(
       user: @user,
       project: @project,
@@ -123,7 +129,7 @@ describe ProjectsController do
 
       delete :destroy, id: @project.id
 
-      expect(count).to eq(count - 1)
+      expect(Project.count).to eq(count - 1)
       expect(response).to redirect_to(projects_path)
     end
 

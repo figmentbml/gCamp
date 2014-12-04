@@ -11,7 +11,26 @@ class ApplicationController < ActionController::Base
     @project.memberships.where(role: 'owner', user_id: current_user)
   end
 
+  def member?
+    @project.memberships.where(role: 'member', user_id: current_user)
+  end
+
+  def current_user_member?
+    @project.memberships.where(user_id: current_user)
+  end
+
+  def authorize_user
+    @user = User.find(params[:id])
+    unless current_user == @user
+      raise AccessDenied
+    end
+  end
+
   helper_method :current_user
+  helper_method :owner?
+  helper_method :member?
+  helper_method :current_user_member?
+  helper_method :authorize_user
 
   class AccessDenied < StandardError
   end
