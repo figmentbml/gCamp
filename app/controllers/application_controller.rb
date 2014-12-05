@@ -7,21 +7,25 @@ class ApplicationController < ActionController::Base
     User.find_by(id: session[:user_id])
   end
 
+  def admin?
+    current_user.admin == true
+  end
+
   def owner?
-    @project.memberships.where(role: 'owner', user_id: current_user)
+    @project.memberships.where(role: 'owner', user_id: current_user) || admin?
   end
 
   def member?
-    @project.memberships.where(role: 'member', user_id: current_user)
+    @project.memberships.where(role: 'member', user_id: current_user) || admin?
   end
 
   def current_user_member?
-    @project.memberships.where(user_id: current_user)
+    @project.memberships.where(user_id: current_user) || admin?
   end
 
   def authorize_user
     @user = User.find(params[:id])
-    unless current_user == @user
+    unless admin? || current_user == @user
       raise AccessDenied
     end
   end
@@ -31,6 +35,7 @@ class ApplicationController < ActionController::Base
   helper_method :member?
   helper_method :current_user_member?
   helper_method :authorize_user
+  helper_method :admin?
 
   class AccessDenied < StandardError
   end
@@ -50,14 +55,14 @@ class ApplicationController < ActionController::Base
   def project_id_match
     project_list = Membership.where(user_id: current_user.id).pluck(:project_id)
     @project = Project.find(params[:id])
-    unless project_list.include?(@project.id)
+    unless admin? || project_list.include?(@project.id)
       raise AccessDenied
     end
   end
 
   def tasks_id_match
     project_list = Membership.where(user_id: current_user.id).pluck(:project_id)
-    unless project_list.include?(@project.id)
+    unless admin? || project_list.include?(@project.id)
       raise AccessDenied
     end
   end

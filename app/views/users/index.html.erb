@@ -17,7 +17,7 @@
         <tr>
           <td><%= link_to ("#{user.first_name} #{user.last_name}"),
             user_path(user) %></td>
-          <% if user.id == current_user.id %>
+          <% if current_user.id == user.id || admin? %>
           <td><%= mail_to(user.email) %></td>
           <td>
             <%= link_to 'Edit', edit_user_path(user) %>
