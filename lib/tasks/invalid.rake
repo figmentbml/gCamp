@@ -19,4 +19,9 @@ namespace :invalid do
     Task.where(project_id: nil).delete_all
     Comment.where.not(task_id: Task.all).delete_all
   end
+
+  desc "Updates deleted comment users to nil"
+  task update: :environment do
+    Comment.where.not(user_id: User.all).update_all(user_id: nil)
+  end
 end
