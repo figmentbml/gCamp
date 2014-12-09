@@ -52,7 +52,8 @@ class UsersController < InternalController
     :last_name,
     :email,
     :password,
-    :password_confirmation
+    :password_confirmation,
+    :admin
     )
   end
 

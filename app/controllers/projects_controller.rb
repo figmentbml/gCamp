@@ -25,8 +25,8 @@ class ProjectsController < InternalController
 
   def edit
     @project = Project.find(params[:id])
-    if owner?.empty?
-      render 'public/404', status: :not_found, layout: false
+    unless owner?.present? || admin?
+      raise AccessDenied
     end
   end
 
@@ -42,8 +42,8 @@ class ProjectsController < InternalController
 
   def destroy
     @project = Project.find(params[:id])
-    if owner?.empty?
-      render 'public/404', status: :not_found, layout: false
+    unless owner?.present? || admin?
+      raise AccessDenied
     else
       @project.destroy
       redirect_to projects_path, notice: "Project was successfully deleted."

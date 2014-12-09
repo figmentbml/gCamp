@@ -55,7 +55,6 @@ class MembershipsController < InternalController
       redirect_to project_memberships_path,
       notice: "You can't delete the last owner.  Please add another owner first."
     end
-    
   end
 
   private
@@ -69,12 +68,14 @@ class MembershipsController < InternalController
   end
 
   def not_owner_render_404
+    return false if admin?
     if owner?.empty?
       raise AccessDenied
     end
   end
 
   def current_user_has_membership?
+    return true if admin?
     @membership.user.id == current_user.id
   end
 

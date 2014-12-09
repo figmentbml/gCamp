@@ -35,7 +35,7 @@
       <td class= "col-sm-2"><%= link_to membership.user.full_name, user_path(membership.user) %></td>
       <td class= "col-sm-2">
         <%= form_for [@project, membership], html: {class: "form-inline"} do |f| %>
-        <% if member?.empty? %>
+        <% if admin? || !owner?.empty? || !member? %>
         <div class="form-group">
           <%= f.select(:role, ["member", "owner"], {}, {class:"form-control"}) %>
         </div>
@@ -50,13 +50,12 @@
         <% end %>
       </td>
       <td>
-        <% if @project.memberships.where(role: 'owner').count > 1 ||
-          membership.user.id == current_user.id ||
-          admin? ||
-          !owner?.empty? %>
-        <%= link_to "", project_membership_path(@project, membership),
-        class: "glyphicon glyphicon-remove", method: :delete, data: {confirm:"Are you sure?" }%>
+        <% #if @project.memberships.where(role: 'owner').count > 1 %>
+        <% if membership.user.id == current_user.id || @project.memberships.where(role: 'owner').count > 1 || !owner?.empty? || admin? %>
+          <%= link_to "", project_membership_path(@project, membership),
+          class: "glyphicon glyphicon-remove", method: :delete, data: {confirm:"Are you sure?" }%>
         <% end %>
+        <% #end %>
       </td>
     </tr>
     <% end %>

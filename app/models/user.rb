@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   validates :last_name, presence: true
   validates :email, presence: true, uniqueness: {case_sensitive: false}
   has_secure_password
-  has_many :memberships, dependent: :destroy
+  has_many :memberships, dependent: :delete_all
   has_many :projects, through: :memberships
   has_many :comments, dependent: :nullify
 

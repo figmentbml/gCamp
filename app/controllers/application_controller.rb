@@ -12,20 +12,17 @@ class ApplicationController < ActionController::Base
   end
 
   def owner?
-    @project.memberships.where(role: 'owner', user_id: current_user) || admin?
+    @project.memberships.where(role: 'owner', user_id: current_user)
   end
 
   def member?
-    @project.memberships.where(role: 'member', user_id: current_user) || admin?
-  end
-
-  def current_user_member?
-    @project.memberships.where(user_id: current_user) || admin?
+    @project.memberships.where(role: 'member', user_id: current_user)
   end
 
   def authorize_user
     @user = User.find(params[:id])
-    unless admin? || current_user == @user
+    return true if admin?
+    unless current_user == @user
       raise AccessDenied
     end
   end
@@ -33,7 +30,6 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
   helper_method :owner?
   helper_method :member?
-  helper_method :current_user_member?
   helper_method :authorize_user
   helper_method :admin?
 

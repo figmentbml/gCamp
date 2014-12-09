@@ -45,8 +45,8 @@ describe MembershipsController do
       expect(response.status).to eq(404)
     end
 
-    it "allows owners can update membership role" do
-      skip
+    it "allows owners to update membership role" do
+    skip #says missing params?
       @membership = Membership.create!(
         user: @user,
         project: @project,
@@ -55,7 +55,7 @@ describe MembershipsController do
 
       session[:user_id] = @user.id
 
-      patch :update, project_id: @project.id, id: @membership.id, role: 'member'
+      patch :update, project_id: @project.id, id: @membership.id, role: 'owner'
 
       expect(response.status).to eq(200)
     end
