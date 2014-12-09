@@ -28,34 +28,42 @@
   <% end %>
 </div>
 <% end %>
-<table class ="table">
+
+<table class = "table">
   <tbody>
     <% @memberships.each do |membership| %>
     <tr>
-      <td class= "col-sm-2"><%= link_to membership.user.full_name, user_path(membership.user) %></td>
-      <td class= "col-sm-2">
-        <%= form_for [@project, membership], html: {class: "form-inline"} do |f| %>
-        <% if admin? || !owner?.empty? || !member? %>
-        <div class="form-group">
-          <%= f.select(:role, ["member", "owner"], {}, {class:"form-control"}) %>
+      <td class="col-sm-2"> <%= link_to membership.user.full_name, user_path(membership.user)%></td>
+      <td class="col-sm-2">
+        <%= form_for [@project, membership], html: {class: "form-inline"}  do |f| %>
+        <% if member?.empty? %>
+        <div class = "form-group">
+          <%= f.select(:role, ["Member", "Owner"], {}, {class: "form-control"}) %>
         </div>
-        <div class="form-group">
-          <%= f.submit "Update", class: "btn btn-primary" %>
+        <div class = "form-group">
+          <%= f.submit "Update", class: "btn btn-primary "%>
         </div>
         <% else %>
-        <div class="form-group">
+        <div class = "form-group">
           <%= membership.role %>
         </div>
         <% end %>
         <% end %>
       </td>
       <td>
-        <% #if @project.memberships.where(role: 'owner').count > 1 %>
-        <% if membership.user.id == current_user.id || @project.memberships.where(role: 'owner').count > 1 || !owner?.empty? || admin? %>
-          <%= link_to "", project_membership_path(@project, membership),
-          class: "glyphicon glyphicon-remove", method: :delete, data: {confirm:"Are you sure?" }%>
+        <% if current_membership && current_membership.role == 'Member' && membership.id == current_membership.id %>
+        <%= link_to "", project_membership_path(@project, membership), method: :delete,
+        data: {confirm: "Are you Sure?"}, class: "glyphicon glyphicon-remove" %>
+        <% elsif (current_membership && current_membership.role == 'Owner' && @memberships.where(role: 'Owner').count > 1) || (current_membership && membership.role == 'Member') %>
+        <%= link_to "", project_membership_path(@project, membership), method: :delete,
+        data: {confirm: "Are you Sure?"}, class: "glyphicon glyphicon-remove" %>
+        <% elsif (admin? && @memberships.where(role: 'Owner').count > 1 && membership.role == 'Owner') %>
+        <%= link_to "", project_membership_path(@project, membership), method: :delete,
+        data: {confirm: "Are you Sure?"}, class: "glyphicon glyphicon-remove" %>
+        <% elsif (admin? && membership.role != 'Owner') %>
+        <%= link_to "", project_membership_path(@project, membership), method: :delete,
+        data: {confirm: "Are you Sure?"}, class: "glyphicon glyphicon-remove" %>
         <% end %>
-        <% #end %>
       </td>
     </tr>
     <% end %>

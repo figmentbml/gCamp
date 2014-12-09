@@ -57,6 +57,13 @@ class MembershipsController < InternalController
     end
   end
 
+  def current_membership
+    Membership.where(user_id: current_user.id, project_id: @project.id).first
+  end
+
+  helper_method :current_membership
+
+
   private
 
   def membership_params
@@ -75,7 +82,6 @@ class MembershipsController < InternalController
   end
 
   def current_user_has_membership?
-    return true if admin?
     @membership.user.id == current_user.id
   end
 

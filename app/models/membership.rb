@@ -9,8 +9,6 @@ class Membership < ActiveRecord::Base
 
   before_destroy :cannot_delete_last_owner
 
-  private
-
   def owners
     project.memberships.where(role: 'owner')
   end
