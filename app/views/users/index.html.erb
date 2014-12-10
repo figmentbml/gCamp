@@ -4,6 +4,7 @@
   </div>
   <h1>Users</h1>
 </div>
+
 <table class="table">
   <thead>
     <tr>
@@ -17,8 +18,10 @@
         <tr>
           <td><%= link_to ("#{user.first_name} #{user.last_name}"),
             user_path(user) %></td>
-          <% if current_user.id == user.id || admin? || #co_project_member %>
+          <% if current_user.shared_project(user) || admin? %>
           <td><%= mail_to(user.email) %></td>
+          <% end %>
+          <% if (current_user.id == user.id) || admin? %>
           <td>
             <%= link_to 'Edit', edit_user_path(user) %>
           </td>

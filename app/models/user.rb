@@ -12,4 +12,7 @@ class User < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
 
+  def shared_project(user)
+    (projects & user.projects).present? 
+  end
 end

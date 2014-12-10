@@ -32,7 +32,7 @@ class ApplicationController < ActionController::Base
   helper_method :member?
   helper_method :authorize_user
   helper_method :admin?
-  helper_method :co_project_member
+  #helper_method :co_project_member
 
   class AccessDenied < StandardError
   end
@@ -61,13 +61,6 @@ class ApplicationController < ActionController::Base
     project_list = Membership.where(user_id: current_user.id).pluck(:project_id)
     unless admin? || project_list.include?(@project.id)
       raise AccessDenied
-    end
-  end
-
-  def co_project_member
-    current_user_projects = current_user.memberships.where(project_id: Project.all).pluck(:project_id)
-    all_user_projects = @user.memberships.where(project_id: Project.all).pluck(:project_id)
-    if current_user_projects.include?(all_user_projects)
     end
   end
 

@@ -16,17 +16,20 @@
   <dt>Last name</dt>
   <dd><%= @user.last_name %></dd>
 </dl>
-<% if admin? || @user.id == current_user.id %>
+
+<% if current_user.shared_project(@user) || admin? || @user.id == current_user.id %>
 <dl class="dl-horizontal">
   <dt>Email name</dt>
   <dd><%= mail_to (@user.email) %></dd>
 </dl>
 <% end %>
 
+<% if @user.id == current_user.id %>
 <dl class="dl-horizontal">
   <dt>Pivotal Tracker Token</dt>
   <dd><%= @user.tracker_token %></dd>
 </dl>
+<% end %>
 
 <% if admin? %>
 <dl class="dl-horizontal">
