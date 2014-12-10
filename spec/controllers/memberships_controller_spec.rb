@@ -46,7 +46,6 @@ describe MembershipsController do
     end
 
     it "allows owners to update membership role" do
-    skip #says missing params?
       @membership = Membership.create!(
         user: @user,
         project: @project,
