@@ -53,7 +53,8 @@ class UsersController < InternalController
     :email,
     :password,
     :password_confirmation,
-    :admin
+    :admin,
+    :tracker_token
     )
   end
 
