@@ -19,6 +19,14 @@ feature "Memberships" do
       password: password,
     )
 
+    @project = Project.create!(
+    name: "Acme"
+    )
+
+    @project2 = create_project
+
+    @membership = create_membership(@project, @user)
+
     signin(@user, password)
     expect(page).to have_content("Sign Out")
     expect(page).to have_content(@user.full_name)
@@ -29,6 +37,19 @@ feature "Memberships" do
 
     expect(page).to have_content("Singing")
     expect(page).to have_content("Project was successfully created.")
+    expect(page).to have_content("Tasks for Singing")
+  end
+
+  scenario "User becomes owner when creating a project" do
+    within '.breadcrumb' do
+      click_on "Singing"
+    end
+    click_on "Member"
+    expect(page).to have_content("Singing : Manage Members")
+    within 'table' do
+      expect(page).to have_content("James Dean")
+      expect(page).to have_content("Owner")
+    end
   end
 
   scenario "Users can see breadcrumbs on membership index" do

@@ -13,6 +13,7 @@ feature "Sign Up" do
     click_button "Sign Up"
     expect(page).to have_content("James Lacy")
     expect(page).to have_content("Sign Out")
+    expect(page).to have_content("New Project")
   end
 
   scenario "Sign Up without email" do

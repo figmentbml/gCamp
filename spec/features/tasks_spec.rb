@@ -16,6 +16,12 @@ feature "Tasks" do
     password: "123",
     password_confirmation: "123"
     )
+    @project2 = create_project
+    @task2 = Task.create!(
+    description: "crazy pants",
+    project_id: @project2,
+    )
+
     visit signin_path
     fill_in "Email", with: "dean@email.com"
     fill_in "Password", with: "123"
@@ -42,6 +48,30 @@ feature "Tasks" do
     click_button "Create Task"
     expect(page).to have_content("test")
     expect(page).to have_content("Task was successfully created.")
+  end
+
+  scenario "Can only see tasks related to projects you are a member of" do
+    visit projects_path
+    within '.table' do
+      click_on "dogs!"
+    end
+    click_on "0 Tasks"
+    click_on "Create Task"
+    fill_in "Description", with: "test"
+    fill_in "Due date", with: "09/20/2014"
+    click_button "Create Task"
+    expect(page).to have_content("test")
+    expect(page).to have_content("Task was successfully created.")
+
+    visit projects_path
+    expect(page).to have_no_content("Singing")
+    expect(page).to have_no_content("crazy pants")
+    within '.table' do
+      click_on "dogs!"
+    end
+    click_on "Task"
+    expect(page).to have_content("test")
+
   end
 
   scenario "Attempt to create task w/o description" do

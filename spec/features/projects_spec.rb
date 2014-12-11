@@ -2,26 +2,35 @@ require 'rails_helper'
 
 feature "Projects" do
   before do
-    User.create!(
-    first_name: "James",
-    last_name: "Dean",
-    email: "dean@email.com",
-    password: "123",
-    password_confirmation: "123"
-    )
-    User.create!(
+    password = 'password'
+    @user = create_user(password: password)
+
+    @betty = create_user(
     first_name: "Betty",
     last_name: "Boop",
     email: "betty@email.com",
-    password: "123",
-    password_confirmation: "123"
+    password: password,
     )
-    visit signin_path
-    fill_in "Email", with: "dean@email.com"
-    fill_in "Password", with: "123"
-    click_button "Sign in"
+
+    @max = create_user(
+    first_name: "Max",
+    last_name: "Mark",
+    email: "max@email.com",
+    password: password,
+    )
+
+    @project = Project.create!(
+    name: "Acme"
+    )
+
+    @project2 = create_project
+
+    @membership = create_membership(@project, @user)
+
+    signin(@user, password)
     expect(page).to have_content("Sign Out")
-    expect(page).to have_content("James Dean")
+    expect(page).to have_content(@user.full_name)
+
   end
 
   scenario "Create Project" do
@@ -32,6 +41,7 @@ feature "Projects" do
     click_button "Create Project"
     expect(page).to have_content("cats")
     expect(page).to have_content("Project was successfully created.")
+    expect(page).to have_content("Tasks for cats")
   end
 
   scenario "Attempts to create project w/o name" do
@@ -84,7 +94,7 @@ feature "Projects" do
     expect(page).to have_content("1 Task")
 
     visit about_path
-    expect(page).to have_content("1 Project")
+    expect(page).to have_content("3 Project")
     expect(page).to have_content("1 Task")
 
     visit projects_path
@@ -99,8 +109,23 @@ feature "Projects" do
     expect(page).to have_no_content("dogs!")
 
     visit about_path
-    expect(page).to have_content("0 Project")
+    expect(page).to have_content("2 Project")
     expect(page).to have_content("0 Task")
+  end
+
+  scenario "Users can only see projects they are members of" do
+    visit root_path
+    click_on "Projects"
+    click_on "Create Project"
+    fill_in "Name", with: "cats"
+    click_button "Create Project"
+    expect(page).to have_content("cats")
+    expect(page).to have_content("Project was successfully created.")
+    expect(page).to have_content("Tasks for cats")
+
+    visit projects_path
+    expect(page).to have_content("cats")
+    expect(page).to have_no_content("Singing")
   end
 
 end

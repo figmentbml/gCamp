@@ -5,20 +5,30 @@ def create_user(overrides = {})
       last_name: "Dean",
       email: "dean@email.com",
       password: "123",
+      admin: false
     }.merge(overrides)
   )
 end
 
-def create_membership(project, user, overrides = {})
+def create_membership(project, user, role = "owner", overrides = {})
   Membership.create!({
-    user_id: @user.id,
-    project_id: @project.id,
-    role: 'owner',
+    user_id: user.id,
+    project_id: project.id,
+    role: role
   }.merge(overrides))
 end
 
 def create_project(overrides = {})
   Project.create!({
-    name: "Singing",
+    name: "Singing"
+  }.merge(overrides))
+end
+
+def create_task(project, overrides ={})
+  Task.create!({
+    description: "apple",
+    complete: false,
+    due_date: Date.today + 7,
+    project_id: project.id
   }.merge(overrides))
 end

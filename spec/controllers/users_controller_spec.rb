@@ -18,42 +18,36 @@ describe UsersController do
 
   describe "#create" do
     it "redirects if you aren't logged in" do
-      get :create
+      post :create
       expect(response).to redirect_to(signin_path)
     end
+
   end
 
   describe "#edit" do
-    it "redirects if you aren't logged in" do
-      skip
-      
+    xit "redirects if you aren't logged in" do
       get :edit
       expect(response).to redirect_to(signin_path)
     end
   end
 
   describe "#show" do
-    it "redirects if you aren't logged in" do
-      skip
-
+    xit "redirects if you aren't logged in" do
       get :show
       expect(response).to redirect_to(signin_path)
     end
   end
 
   describe "#update" do
-    it "redirects if you aren't logged in" do
-      skip
-
-      get :update
+    xit "redirects if you aren't logged in" do
+      patch :update
       expect(response).to redirect_to(signin_path)
     end
   end
 
   describe "#destroy" do
-    it "redirects if you aren't logged in" do
-      skip
-      get :destroy
+    xit "redirects if you aren't logged in" do
+      delete :destroy
       expect(response).to redirect_to(signin_path)
     end
   end

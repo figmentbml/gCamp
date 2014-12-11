@@ -1,6 +1,34 @@
 require 'rails_helper'
 
 describe ProjectsController do
+  before do
+    password = 'password'
+    @user = create_user(password: password)
+
+    @betty = create_user(
+    first_name: "Betty",
+    last_name: "Boop",
+    email: "betty@email.com",
+    password: password,
+    admin: true
+    )
+
+    @max = create_user(
+    first_name: "Max",
+    last_name: "Mark",
+    email: "max@email.com",
+    password: password,
+    )
+
+    @project = Project.create!(
+    name: "Acme"
+    )
+
+    @project2 = create_project
+
+    @betty_membership = create_membership(@project2, @betty)
+
+  end
 
   describe "#index" do
     it "doesn't allow non-logged in users to view" do
@@ -11,19 +39,6 @@ describe ProjectsController do
   end
 
   describe "#edit" do
-    before do
-      @user = User.create!(
-      first_name: "James",
-      last_name: "Dean",
-      email: "dean@email.com",
-      password: "123",
-      password_confirmation: "123"
-      )
-      @project = Project.create!(
-      name: "Acme"
-      )
-    end
-
     it "does not allow non-members" do
       session[:user_id] = @user.id
 
@@ -33,11 +48,8 @@ describe ProjectsController do
     end
 
     it "does not allow members" do
-      Membership.create!(
-      user: @user,
-      project: @project,
-      role: 'member'
-      )
+      @membership = create_membership(@project, @user, "member")
+
       session[:user_id] = @user.id
 
       get :edit, id: @project.id
@@ -59,24 +71,16 @@ describe ProjectsController do
     end
 
     it "does allow admins" do
+      session[:user_id] = @betty.id
+
+      get :edit, id: @project.id
+
+      expect(response.status).to eq(200)
     end
 
   end
 
   describe "#destroy" do
-
-    before do
-      @user = User.create!(
-      first_name: "James",
-      last_name: "Dean",
-      email: "dean@email.com",
-      password: "123",
-      password_confirmation: "123"
-      )
-      @project = Project.create!(
-      name: "Acme"
-      )
-    end
 
     it "does not allow non-members" do
       session[:user_id] = @user.id
@@ -89,11 +93,8 @@ describe ProjectsController do
     end
 
     it "does not allow project members" do
-      Membership.create!(
-      user: @user,
-      project: @project,
-      role: 'member'
-      )
+      @membership = create_membership(@project, @user, "member")
+
       session[:user_id] = @user.id
       count = Project.count
 
@@ -104,13 +105,7 @@ describe ProjectsController do
     end
 
     it "allows admins to delete" do
-      skip
-      Membership.create!(
-      user: @user,
-      project: @project,
-      role: 'owner'
-      )
-      session[:user_id] = @user.id
+      session[:user_id] = @betty.id
       count = Project.count
 
       delete :destroy, id: @project.id
@@ -120,17 +115,9 @@ describe ProjectsController do
     end
 
     it "allows owners to delete" do
-      skip
-      Membership.create!(
-      user: @user,
-      project: @project,
-      role: 'owner'
-      )
-      Membership.create!(
-      user: @user,
-      project: @project,
-      role: 'owner'
-      )
+      @membership = create_membership(@project, @user, "owner")
+      @membership3 = create_membership(@project, @betty, "owner")
+
       session[:user_id] = @user.id
       count = Project.count
 
