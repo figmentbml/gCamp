@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 describe UsersController do
+  before do
+    password = 'password'
+    @user = create_user(password: password)
+  end
 
   describe "#index" do
     it "redirects if you aren't logged in" do
@@ -25,29 +29,29 @@ describe UsersController do
   end
 
   describe "#edit" do
-    xit "redirects if you aren't logged in" do
-      get :edit
+    it "redirects if you aren't logged in" do
+      get :edit, id: @user.id
       expect(response).to redirect_to(signin_path)
     end
   end
 
   describe "#show" do
-    xit "redirects if you aren't logged in" do
-      get :show
+    it "redirects if you aren't logged in" do
+      get :show, id: @user.id
       expect(response).to redirect_to(signin_path)
     end
   end
 
   describe "#update" do
-    xit "redirects if you aren't logged in" do
-      patch :update
+    it "redirects if you aren't logged in" do
+      patch :update, id: @user.id
       expect(response).to redirect_to(signin_path)
     end
   end
 
   describe "#destroy" do
-    xit "redirects if you aren't logged in" do
-      delete :destroy
+    it "redirects if you aren't logged in" do
+      delete :destroy, id: @user.id
       expect(response).to redirect_to(signin_path)
     end
   end

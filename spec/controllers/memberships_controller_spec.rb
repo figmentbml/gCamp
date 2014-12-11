@@ -1,22 +1,21 @@
 require 'rails_helper'
 
 describe MembershipsController do
+  before do
+    @user = User.create!(
+    first_name: "James",
+    last_name: "Dean",
+    email: "dean@email.com",
+    password: "123",
+    password_confirmation: "123"
+    )
+
+    @project = Project.create!(
+    name: "Acme"
+    )
+  end
 
   describe "#index" do
-    before do
-      @user = User.create!(
-        first_name: "James",
-        last_name: "Dean",
-        email: "dean@email.com",
-        password: "123",
-        password_confirmation: "123"
-      )
-
-      @project = Project.create!(
-        name: "Acme"
-      )
-    end
-
     it "doesn't allow non-logged in users to view" do
       get :index, project_id: @project.id
 
