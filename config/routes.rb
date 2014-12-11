@@ -20,6 +20,8 @@ Rails.application.routes.draw do
   post '/signin' => 'authentication#create'
   get '/signout' => 'authentication#destroy', as: :signout
 
+  get '/tracker_projects/:tracker_id' => 'projects#tracker_stories', as: :tracker_projects
+
 
 end
 
