@@ -1,7 +1,7 @@
 == README
 
 ![](https://travis-ci.org/figmentbml/gCamp.svg)
-
+[![Code Climate](https://codeclimate.com/github/figmentbml/gCamp/badges/gpa.svg)](https://codeclimate.com/github/figmentbml/gCamp)
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
