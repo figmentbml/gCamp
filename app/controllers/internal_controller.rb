@@ -5,6 +5,7 @@ class InternalController < ApplicationController
   private
   def ensure_logged_in_user
     unless current_user
+      save_url
       redirect_to signin_path, notice: "You must be logged in to access that action"
     end
   end

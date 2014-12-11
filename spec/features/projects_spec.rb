@@ -61,7 +61,6 @@ feature "Projects" do
   end
 
   scenario "Delete project, deletes related tasks" do
-    skip
     visit projects_path
     click_on "Create Project"
     fill_in "Name", with: "dogs!"

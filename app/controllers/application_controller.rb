@@ -3,6 +3,17 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+  def save_url
+    if request.get?
+      session[:first_url] = request.url
+    end
+  end
+
+  def redirect_to_previous_url_or_projects
+    redirect_to (session[:first_url] || projects_path)
+    session.delete(:first_url)
+  end
+
   def current_user
     User.find_by(id: session[:user_id])
   end
@@ -32,7 +43,8 @@ class ApplicationController < ActionController::Base
   helper_method :member?
   helper_method :authorize_user
   helper_method :admin?
-  #helper_method :co_project_member
+  helper_method :redirect_to_previous_url
+
 
   class AccessDenied < StandardError
   end

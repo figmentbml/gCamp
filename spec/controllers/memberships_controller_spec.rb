@@ -11,6 +11,7 @@ describe MembershipsController do
         password: "123",
         password_confirmation: "123"
       )
+
       @project = Project.create!(
         name: "Acme"
       )
@@ -46,6 +47,20 @@ describe MembershipsController do
     end
 
     it "allows owners to update membership role" do
+      betty = User.create(
+      first_name: "Betty",
+      last_name: "Boop",
+      email: "betty@email.com",
+      password: "123",
+      password_confirmation: "123"
+      )
+
+      betty_membership = Membership.create(
+      user: betty,
+      project: @project,
+      role: 'member'
+      )
+
       @membership = Membership.create!(
         user: @user,
         project: @project,
@@ -54,9 +69,9 @@ describe MembershipsController do
 
       session[:user_id] = @user.id
 
-      patch :update, project_id: @project.id, id: @membership.id, role: 'owner'
+      patch :update, project_id: @project.id, id: betty_membership.id, membership:{role: 'owner'}
 
-      expect(response.status).to eq(200)
+      expect(response.status).to eq(302)
     end
   end
 

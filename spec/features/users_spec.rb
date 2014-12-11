@@ -26,7 +26,7 @@ feature "Users" do
 
   scenario "Edit User from Users Index" do
     visit users_path
-    expect(page).to have_content("dean@email.com")
+    expect(page).to have_content("James Dean")
 
     within 'table tr', text: "James Dean" do
       click_on "Edit"
@@ -35,12 +35,11 @@ feature "Users" do
     click_button "Update User"
     expect(page).to have_content("James")
     expect(page).to have_content("Dean")
-    expect(page).to have_content("james@email.com")
   end
 
   scenario "Edit User from User Show" do
     visit users_path
-    expect(page).to have_content("dean@email.com")
+    expect(page).to have_content("James Dean")
 
     within 'table tr', text: "James Dean" do
       click_on "James Dean"
@@ -50,13 +49,12 @@ feature "Users" do
     click_button "Update User"
     expect(page).to have_content("James")
     expect(page).to have_content("Dean")
-    expect(page).to have_content("james@email.com")
 
   end
 
   scenario "Delete User" do
     visit users_path
-    expect(page).to have_content("dean@email.com")
+    expect(page).to have_content("James Dean")
     within 'table tr', text: "James Dean" do
       click_on "Edit"
     end
@@ -66,7 +64,7 @@ feature "Users" do
 
   scenario "Show User" do
     visit users_path
-    expect(page).to have_content("dean@email.com")
+    expect(page).to have_content("James Dean")
     within 'table tr', text: "James Dean" do
       click_on "James Dean"
     end
