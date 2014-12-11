@@ -3,10 +3,13 @@ class ProjectsController < InternalController
 
   def index
     @projects = Project.all
+    tracker_api = TrackerAPI.new
+    @tracker_projects = tracker_api.projects(current_user.tracker_token)
   end
 
   def show
     @project = Project.find(params[:id])
+    #@tracker_project = TrackerAPI.project.find(current_user.tracker_token)
   end
 
   def new

@@ -43,8 +43,8 @@
   </tbody>
 </table>
 
-<% if current_user.tracker_token.present? %>
-<!-- admin can see for now -->
+<% if current_user.tracker_token.present? || admin? %>
+<!-- admin can see for now not sure if it should always -->
 <div class="page-header">
   <h1>Pivotal Tracker Projects</h1>
 </div>
@@ -55,9 +55,9 @@
     </tr>
   </thead>
   <tbody>
-    <% @projects.each do |project| %>
+    <% @tracker_projects.each do |project| %>
     <tr>
-      <td><%= link_to project.name, project_path(project) %></td>
+      <td><%= link_to project[:name], project_path(project) %></td>
     </tr>
     <% end %>
   </tbody>
