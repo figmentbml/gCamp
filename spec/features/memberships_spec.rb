@@ -65,7 +65,7 @@ feature "Memberships" do
     expect(page).to have_content("Membership")
   end
 
-  scenario "Users can add members to projects" do
+  scenario "Owners can add members to projects" do
     visit projects_path
     expect(page).to have_content("Projects")
     within 'table.table' do
@@ -103,7 +103,7 @@ feature "Memberships" do
     expect(page).to have_content("User can't be blank")
   end
 
-  scenario "Users can change role" do
+  scenario "Members can change roles" do
     visit projects_path
     expect(page).to have_content("Projects")
     within 'table.table' do

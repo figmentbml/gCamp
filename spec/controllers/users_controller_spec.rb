@@ -33,6 +33,12 @@ describe UsersController do
       get :edit, id: @user.id
       expect(response).to redirect_to(signin_path)
     end
+
+    it "allows users to edit their self" do
+    end
+
+    it "allows admins to update users with admin true" do
+    end
   end
 
   describe "#show" do

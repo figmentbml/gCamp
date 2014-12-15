@@ -78,7 +78,146 @@ describe TasksController do
     end
   end
 
+  describe "#new" do
+    it "doesn't allow non-project members to create" do
+      session[:user_id] = @member
+      @task3 = create_task(@admin_project)
+
+      get :new, project_id: @admin_project.id
+
+      expect(response.status).to eq(404)
+    end
+
+    it "does allow project members to create" do
+      session[:user_id] = @member
+      @task3 = create_task(@project)
+
+      get :new, project_id: @project.id
+      expect(response.status).to eq(200)
+    end
+
+    it "doesn't allow non-project owners to create" do
+      session[:user_id] = @owner
+      @task3 = create_task(@admin_project)
+
+      get :new, project_id: @admin_project.id
+      expect(response.status).to eq(404)
+    end
+
+    it "does allow project owners to create" do
+      session[:user_id] = @owner
+      @task = create_task(@project)
+
+      get :new, project_id: @project.id
+      expect(response.status).to eq(200)
+    end
+
+    it "does allow admins to create" do
+      session[:user_id] = @admin
+      @task2 = create_task(@admin_project)
+
+      @task = create_task(@project)
+
+      get :new, project_id: @admin_project.id
+      expect(response.status).to eq(200)
+    end
+  end
+
+
   describe "#create" do
+    it "doesn't allow non-project members to create" do
+      session[:user_id] = @member
+      @task3 = create_task(@admin_project)
+
+      post :create, project_id: @admin_project.id
+      expect(response.status).to eq(404)
+    end
+
+    it "does allow project members to create" do
+      session[:user_id] = @member
+
+      post :create,  project_id: @project.id, task: {description: "foo"}
+      task = Task.last
+      expect(task.project_id).to eq(@project.id)
+      expect(task.description).to eq("foo")
+    end
+
+    it "doesn't allow non-project owners to create" do
+      session[:user_id] = @owner
+      @task3 = create_task(@admin_project)
+
+      post :create, project_id: @admin_project.id
+      expect(response.status).to eq(404)
+    end
+
+    it "does allow project owners to create" do
+      session[:user_id] = @owner
+      @task = create_task(@project)
+
+      post :create, project_id: @project.id, task: {description: "foo"}
+      task = Task.last
+      expect(task.project_id).to eq(@project.id)
+      expect(task.description).to eq("foo")
+    end
+
+    it "does allow admins to create" do
+      session[:user_id] = @admin
+      @task2 = create_task(@admin_project)
+
+      post :create, project_id: @project.id, task: {description: "foo"}
+      task = Task.last
+      expect(task.project_id).to eq(@project.id)
+      expect(task.description).to eq("foo")
+    end
+  end
+
+  xdescribe "#edit" do
+    it "doesn't allow non-project members to create" do
+      session[:user_id] = @member
+      @task3 = create_task(@admin_project)
+
+      get :new, project_id: @admin_project.id
+
+      expect(response.status).to eq(404)
+    end
+
+    it "does allow project members to create" do
+      session[:user_id] = @member
+      @task3 = create_task(@project)
+
+      get :new, project_id: @project.id
+      expect(response.status).to eq(200)
+    end
+
+    it "doesn't allow non-project owners to create" do
+      session[:user_id] = @owner
+      @task3 = create_task(@admin_project)
+
+      get :new, project_id: @admin_project.id
+      expect(response.status).to eq(404)
+    end
+
+    it "does allow project owners to create" do
+      session[:user_id] = @owner
+      @task = create_task(@project)
+
+      get :new, project_id: @project.id
+      expect(response.status).to eq(200)
+    end
+
+    it "does allow admins to create" do
+      session[:user_id] = @admin
+      @task2 = create_task(@admin_project)
+
+      @task = create_task(@project)
+
+      get :new, project_id: @admin_project.id
+      expect(response.status).to eq(200)
+    end
+  end
+
+
+  xdescribe "#update" do
     it "doesn't allow non-project members to create" do
       session[:user_id] = @member
       @task3 = create_task(@admin_project)
