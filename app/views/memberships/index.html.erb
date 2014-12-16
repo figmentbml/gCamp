@@ -38,7 +38,7 @@
         <%= form_for [@project, membership], html: {class: "form-inline"}  do |f| %>
         <% if member?.empty? %>
         <div class = "form-group">
-          <%= f.select(:role, ["Member", "Owner"], {}, {class: "form-control"}) %>
+          <%= f.select(:role, ["member", "owner"], {}, {class: "form-control"}) %>
         </div>
         <div class = "form-group">
           <%= f.submit "Update", class: "btn btn-primary "%>
