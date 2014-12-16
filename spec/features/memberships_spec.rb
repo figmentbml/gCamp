@@ -48,7 +48,7 @@ feature "Memberships" do
     expect(page).to have_content("Singing : Manage Members")
     within 'table' do
       expect(page).to have_content("James Dean")
-      expect(page).to have_content("Owner")
+      expect(page).to have_content("owner")
     end
   end
 
@@ -120,21 +120,17 @@ feature "Memberships" do
       click_on "Add New Member"
     end
     within 'table.table tr', text: "Betty" do
-      select "Owner"
+      select "owner"
       click_on "Update"
     end
     expect(page).to have_content(@betty.full_name)
-    expect(page).to have_content("Owner")
+    expect(page).to have_content("owner")
     expect(page).to have_content(" was successfully updated")
     within 'table.table tr', text: "James" do
-      select "Owner"
+      select "owner"
       click_on "Update"
     end
     expect(page).to have_content(" was successfully updated")
-    within 'table.table tr', text: "James" do
-      find('.glyphicon').click
-    end
-    expect(page).to have_content("James Dean was successfully deleted")
   end
 
   scenario "Can't delete last owner" do
