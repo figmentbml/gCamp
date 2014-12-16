@@ -24,7 +24,7 @@
   <tbody>
     <% @tracker_stories.each do |story| %>
     <tr>
-      <td><%= story[:name]  %> </td>
+      <td><%= link_to story[:name], 'http://www.pivotaltracker.com'  %> </td>
       <td>
         <%= story[:estimate] %>
       </td>

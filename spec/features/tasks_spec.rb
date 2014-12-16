@@ -225,7 +225,9 @@ feature "Tasks" do
   within '.table' do
     click_link "puppies"
   end
-  expect(page).to have_content("puppies" && "Show" && "Comments")
+  expect(page).to have_content("puppies")
+  expect(page).to have_content("Show")
+  expect(page).to have_content("Comments")
   expect(page).to have_button("Add Comment")
   fill_in "comment_comment_body", with: "omg I love red collars!"
   click_on "Add Comment"
@@ -242,7 +244,10 @@ feature "Tasks" do
   end
 
   visit about_path
-  expect(page).to have_content("1 Project" && "1 Task" && "2 Comments" && "2 User")
+  expect(page).to have_content("1 Project")
+  expect(page).to have_content("1 Task")
+  expect(page).to have_content("2 Comments")
+  expect(page).to have_content("2 User")
   within '.nav' do
     click_on "James Dean"
   end
@@ -269,7 +274,10 @@ feature "Tasks" do
   expect(page).to have_content("(deleted user)")
 
   visit about_path
-  expect(page).to have_content("0 Project" && "0 Task" && "0 Comments" && "1 User")
+  expect(page).to have_content("0 Project")
+  expect(page).to have_content("0 Task")
+  expect(page).to have_content("0 Comments")
+  expect(page).to have_content("1 User")
 end
 
 scenario "Users that aren't logged in can't add comments" do
