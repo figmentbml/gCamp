@@ -19,15 +19,16 @@
           <td><%= link_to ("#{user.first_name} #{user.last_name}"),
             user_path(user) %></td>
           <% if current_user.shared_project(user) || admin? %>
-          <td><%= mail_to(user.email) %></td>
+            <td><%= mail_to(user.email) %></td>
+          <% else %>
+            <td></td>
           <% end %>
           <% if (current_user.id == user.id) || admin? %>
-          <td>
-            <%= link_to 'Edit', edit_user_path(user) %>
-          </td>
+            <td>
+              <%= link_to 'Edit', edit_user_path(user) %>
+            </td>
           <% else %>
-          <td></td>
-          <td></td>
+            <td></td>
           <% end %>
         </tr>
         <% end %>
