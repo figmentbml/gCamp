@@ -36,7 +36,8 @@ class MembershipsController < InternalController
       redirect_to project_memberships_path,
       notice: "#{@membership.user.full_name} was successfully updated"
     else
-      render :edit
+      redirect_to project_memberships_path,
+      notice: "You can't change the membership on the last owner."
     end
   end
 
