@@ -244,8 +244,8 @@ feature "Tasks" do
   end
 
   visit about_path
-  expect(page).to have_content("1 Project")
-  expect(page).to have_content("1 Task")
+  expect(page).to have_content("2 Project")
+  expect(page).to have_content("2 Task")
   expect(page).to have_content("2 Comments")
   expect(page).to have_content("2 User")
   within '.nav' do
@@ -274,9 +274,9 @@ feature "Tasks" do
   expect(page).to have_content("(deleted user)")
 
   visit about_path
-  expect(page).to have_content("0 Project")
-  expect(page).to have_content("0 Task")
-  expect(page).to have_content("0 Comments")
+  expect(page).to have_content("1 Project")
+  expect(page).to have_content("2 Task")
+  expect(page).to have_content("2 Comments")
   expect(page).to have_content("1 User")
 end
 
