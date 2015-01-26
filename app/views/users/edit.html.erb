@@ -1,6 +1,8 @@
 <%= render 'form', title: "Edit User", button_name: "Update User" %>
 
-<div class="col-sm-offset-2 col-sm-4 well well-lg text-center">
-    <%= link_to 'Delete User', user_path(@user), method: :delete,
-    class: "btn btn-danger btn-primary" %>
+<div class="row">
+  <div class="col-sm-offset-2 col-sm-4 well well-lg text-center">
+      <%= link_to 'Delete User', user_path(@user), method: :delete,
+      class: "btn btn-danger btn-primary" %>
+  </div>
 </div>
